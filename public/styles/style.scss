@@ -23,23 +23,17 @@ h2 {
 form {
   border: 1px solid green;
   border-radius: 4px;
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.5rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  input#video_url {
+    width: 100%;
+    margin: 0 0.6rem;
+  }
 }
 
-label {
-  margin-right: 0.5rem;
-}
-
-input[id=video_url] {
-  width: 100%;
-}
-
-
-input[type=submit] {
-  margin-left: 0.5rem;
-  padding: 0 1.1rem;
-}
 
 pre {
   font-size: 0.8rem;
