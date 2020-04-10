@@ -1,6 +1,6 @@
 body {
   box-sizing: border-box;
-  font: 14px Helvetica, Arial, sans-serif;
+  font: 16px Helvetica, Arial, sans-serif;
 }
 
 section {
@@ -10,4 +10,42 @@ section {
 
 p {
   margin: 0.9rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+form {
+  border: 1px solid green;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  display: flex;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+input[id=video_url] {
+  width: 100%;
+}
+
+
+input[type=submit] {
+  margin-left: 0.5rem;
+  padding: 0 1.1rem;
+}
+
+pre {
+  font-size: 0.8rem;
+  overflow: scroll;
+  padding: 1.1rem 0.9rem;
+  background-color: #3d3d3d;
+  color: #dadee0;
+  border-radius: 3px;
 }
