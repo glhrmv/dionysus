@@ -3,6 +3,11 @@ body {
   font: 14px Helvetica, Arial, sans-serif;
 }
 
-.container {
-  margin: 0 auto;
+section {
+  max-width: 720px;
+  margin: 2rem auto;
+}
+
+p {
+  margin: 0.9rem 0;
 }
