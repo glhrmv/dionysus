@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title><%= error.status %> - <%= message %></title>
-  <link rel='stylesheet' href='/styles/style.css' />
-</head>
+<% include ../partials/head %>
 
 <body>
+  <% include ../partials/header %>
+
   <section>
-    <h1><%= message %></h1>
-    <h2><%= error.status %></h2>
+    <h2><%= message %></h2>
+    <h3><%= error.status %></h3>
     <pre><%= error.stack %></pre>
   </section>
+
 </body>
 
 </html>
