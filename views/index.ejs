@@ -11,11 +11,13 @@
     <p>Enter a YouTube video URL below.</p>
     
     <section>
-      <form action="/" method="post">
-        <label for="video_url">Video:</label>
-        <input type="text" id="video_url" placeholder="https://youtu.be/W8qplIE-6UU" name="videoUrl" autofocus>
-        <input class="btn" type="submit" value="Submit">
-      </form>
+      <div class="box">
+        <form action="/" method="post">
+          <label for="video_url">Video:</label>
+          <input type="text" id="video_url" placeholder="https://youtu.be/W8qplIE-6UU" name="videoUrl" autofocus>
+          <input class="btn" type="submit" value="Submit">
+        </form>
+      </div>
     </section>
 
   <% include ../partials/footer %>

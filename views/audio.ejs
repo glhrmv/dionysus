@@ -4,14 +4,20 @@
 <% include ../partials/head %>
 
 <body>
-  <% include ../partials/header %>
+	<% include ../partials/header %>
 
-  <section>
-		<h3><%= id %></h3>
-	</section>
-	
 	<section>
-		audio
+		<h3><%= id %></h3>
+		<p>Converted video</p>
+	</section>
+
+	<section>
+		<div class="box">
+			<audio controls src="/audio/<%= id %>.mp3">
+				Your browser does not support the
+				<code>audio</code> element.
+			</audio>
+		</div>
 	</section>
 
 	<% include ../partials/footer %>
