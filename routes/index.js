@@ -5,9 +5,7 @@ var youtubedl = require("youtube-dl");
 
 var router = express.Router();
 
-const options = {
-  cwd: path.join(__dirname, "../public/audio"),
-};
+const audioFolder = path.join(__dirname, "../public/audio");
 
 // GET /
 router.get("/", (req, res) => {
@@ -18,24 +16,34 @@ router.get("/", (req, res) => {
 router.post("/", (req, res, next) => {
   const videoId = parseVideoId(req.body.videoUrl);
 
+  if (!fs.existsSync(audioFolder))
+    fs.mkdirSync(audioFolder);
+
   // If we already have this video downloaded, just redirect to audio page
-  if (fs.existsSync(path.join(__dirname, "..", `/public/audio/${videoId}.mp3`)))
+  if (fs.existsSync(path.join(audioFolder, `${videoId}.mp3`)))
     return res.redirect("/audio?id=" + videoId);
 
+  const args = [
+    "--extract-audio",
+    "--audio-format",
+    "mp3",
+    "-o",
+    '%(id)s.%(ext)s',
+  ];
+
+  const options = {
+    cwd: audioFolder,
+  };
+
   // Download the video
-  youtubedl.exec(
-    req.body.videoUrl,
-    ["--extract-audio", "--audio-format", "mp3", "-o", "%(id)s.%(ext)s"],
-    options,
-    (err, output) => {
-      if (err) return next(err);
+  youtubedl.exec(req.body.videoUrl, args, options, (err, output) => {
+    if (err) return next(err);
 
-      // console.log(output.join("\n"));
+    // console.log(output.join("\n"));
 
-      // Everything went well, redirect to audio
-      return res.redirect("/audio?id=" + videoId);
-    }
-  );
+    // Everything went well, redirect to audio
+    return res.redirect("/audio?id=" + videoId);
+  });
 });
 
 // GET /audio
