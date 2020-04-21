@@ -13,10 +13,24 @@
 
 	<section>
 		<div class="box">
-			<audio controls src="/audio/<%= id %>.mp3">
+			<audio id="audio" src="/audio/<%= id %>.mp3">
 				Your browser does not support the
 				<code>audio</code> element.
 			</audio>
+
+			<button class="btn" data-playing="false" role="switch" aria-checked="false">
+				<span>Play/Pause</span>
+			</button>
+
+			<div>
+				<p>Volume</p>
+				<input type="range" id="volume" min="0" max="2" value="1" step="0.01">
+			</div>
+			
+			<div>
+				<p>Pan</p>
+				<input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+			</div>
 		</div>
 	</section>
 
