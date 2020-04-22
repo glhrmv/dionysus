@@ -53,8 +53,10 @@ const loadSource = function (url) {
       });
     });
 };
+var id = sessionStorage.getItem('audioId');
 
-loadSource('./audio/'+id+'.mp3');
+setTimeout(() => {  loadSource(''+id+'.mp3'); }, 2000);
+
 
 let is_playing = false;
 const play = function () {
