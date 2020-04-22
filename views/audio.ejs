@@ -4,38 +4,55 @@
 <% include ../partials/head %>
 
 <body>
-	<% include ../partials/header %>
+    <% include ../partials/header %>
 
-	<section>
-		<h3><%= id %></h3>
-		<p>Converted video</p>
-	</section>
+    <section>
+        <p>Converted video</p>
+    </section>
 
-	<section>
-		<div class="box">
-			<audio id="audio" src="/audio/<%= id %>.mp3">
-				Your browser does not support the
-				<code>audio</code> element.
-			</audio>
+    <section>
+        <div class="box">
+            <div class="audio-player">
+                <div class="audio-wrapper" id="player-container" href="javascript:;">
+                    <audio id="audio">
+                        <source src="/audio/<%= id %>.mp3" type="audio/mp3">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                </div>
 
-			<button class="btn" data-playing="false" role="switch" aria-checked="false">
+                <div class="player-controls scrubber">
+                    <p class="track-title"><%= id %></p>
+                    <div class="player-time">
+                        <small id="start-time">00:00</small>
+                        <small id="end-time">00:00</small>
+                    </div>
+                    <span id="seek-obj-container">
+                        <progress id="seek-obj" value="0" max="1"></progress>
+                    </span>
+                </div>
+            </div>
+
+            <button id="play-btn" class="btn" data-playing="false" role="switch" aria-checked="false">
 				<span>Play/Pause</span>
 			</button>
 
-			<div>
-				<p>Volume</p>
-				<input type="range" id="volume" min="0" max="2" value="1" step="0.01">
-			</div>
-			
-			<div>
-				<p>Pan</p>
-				<input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
-			</div>
-		</div>
-	</section>
+            <div>
+                <p>Volume</p>
+                <input autocomplete="off" type="range" id="volume" min="0" max="2" value="1" step="0.01">
+            </div>
 
-	<% include ../partials/footer %>
-	<script src="/scripts/audio.js"></script>
+            <div>
+                <p>Pan</p>
+                <input autocomplete="off" type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+            </div>
+        </div>
+    </section>
+
+    <% include ../partials/footer %>
+
+    <script src="/scripts/player.js"></script>
+    <script src="/scripts/audio.js"></script>
 </body>
 
 </html>

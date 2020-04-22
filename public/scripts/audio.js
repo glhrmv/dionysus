@@ -1,50 +1,28 @@
 console.log("hello from audio.js");
 
-// HTML element selection 
+// HTML element selection
 // audio element
-const audioElement = document.querySelector("#audio");
-// play/pause button
-const playButton = document.querySelector("button");
+const player = document.querySelector("#audio");
 // volume slider
 const volumeControl = document.querySelector("#volume");
 // select pan slider
-const pannerControl = document.querySelector('#panner');
+const pannerControl = document.querySelector("#panner");
 
 // create audio context
-const audioContext = new AudioContext();
+const audioCtx = new AudioContext();
 
 // pass it into the audio context
-const track = audioContext.createMediaElementSource(audioElement);
+const track = audioCtx.createMediaElementSource(player);
 
 // context nodes
-const gainNode = new GainNode(audioContext);
-const panNode = new StereoPannerNode(audioContext, { pan: 0 });
+const gainNode = new GainNode(audioCtx);
+const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
+const endNode = audioCtx.destination;
 
 // context connections (audio graph)
-track.connect(gainNode);
-gainNode.connect(panNode);
-panNode.connect(audioContext.destination);
+track.connect(gainNode).connect(panNode).connect(endNode);
 
 // event listeners
-
-// play / pause control
-playButton.addEventListener(
-  "click",
-  function () {
-    // check if context is in suspended state (autoplay policy)
-    if (audioContext.state === "suspended") audioContext.resume();
-
-    // play or pause track depending on state
-    if (this.dataset.playing === "false") {
-      audioElement.play();
-      this.dataset.playing = "true";
-    } else if (this.dataset.playing === "true") {
-      audioElement.pause();
-      this.dataset.playing = "false";
-    }
-  },
-  false
-);
 
 // volume control
 volumeControl.addEventListener(
@@ -56,15 +34,10 @@ volumeControl.addEventListener(
 );
 
 // pan control
-pannerControl.addEventListener('input', function() {
+pannerControl.addEventListener(
+  "input",
+  function () {
     panNode.pan.value = this.value;
-}, false);
-
-// audio element finish track
-audioElement.addEventListener(
-  "ended",
-  () => {
-    playButton.dataset.playing = "false";
   },
   false
 );

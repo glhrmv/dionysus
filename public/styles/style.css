@@ -58,7 +58,7 @@ footer {
   min-height: 1.2rem;
   padding: 0.6rem 1.4rem;
   font-size: 1rem;
-  margin: 0 0.6rem;
+  margin: 0;
   transition: all 200ms ease 0s; }
   .btn:hover {
     background: #2f2f2f none repeat scroll 0% 0%;
@@ -83,5 +83,69 @@ footer {
     border: 2px solid #2f2f2f; }
   #video_url:focus {
     border: 2px solid black; }
+
+.audio-player {
+  margin-bottom: 2rem; }
+  .audio-player .player-controls {
+    width: 100%; }
+    .audio-player .player-controls .track-title {
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem 0; }
+    .audio-player .player-controls .player-time {
+      display: flex;
+      justify-content: space-between; }
+      .audio-player .player-controls .player-time #start-time,
+      .audio-player .player-controls .player-time #end-time {
+        padding: 0.6rem 0 0.2rem 0; }
+    .audio-player .player-controls progress {
+      width: 100%; }
+    .audio-player .player-controls progress[value] {
+      background-color: #fff;
+      color: #2f2f2f;
+      height: 12px; }
+    .audio-player .player-controls progress[value]::-webkit-progress-bar {
+      background-color: #fff;
+      border-radius: 2px;
+      color: #2f2f2f; }
+    .audio-player .player-controls progress::-webkit-progress-value {
+      background-color: #2f2f2f; }
+    .audio-player .player-controls progress::-moz-progress-bar {
+      background-color: #2f2f2f; }
+  .audio-player #play-btn {
+    cursor: pointer;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 60px solid #2f2f2f;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    left: 10px; }
+    .audio-player #play-btn:after {
+      content: '';
+      opacity: 0;
+      transition: opacity 0.6s;
+      -webkit-transition: opacity 0.6s;
+      -moz-transition: opacity 0.6s; }
+    .audio-player #play-btn:hover:before, .audio-player #play-btn:focus:before {
+      transform: scale(1.1);
+      -webkit-transform: scale(1.1);
+      -moz-transform: scale(1.1); }
+    .audio-player #play-btn.active {
+      border-color: transparent; }
+      .audio-player #play-btn.active:after {
+        content: '';
+        opacity: 1;
+        width: 50px;
+        height: 80px;
+        position: absolute;
+        right: 5px;
+        top: -40px;
+        border-left: 20px solid #2f2f2f;
+        box-shadow: inset 30px 0 0 0 #fff; }
 
 /*# sourceMappingURL=style.css.map */
