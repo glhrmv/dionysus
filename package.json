@@ -10,12 +10,14 @@
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "ffmpeg": "0.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "node-sass-middleware": "^0.11.0"
+    "node-sass-middleware": "^0.11.0",
+    "soundtouchjs": "^0.1.18",
+    "youtube-dl": "^3.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3",
-    "youtube-dl": "^3.0.2"
+    "nodemon": "^2.0.3"
   }
 }

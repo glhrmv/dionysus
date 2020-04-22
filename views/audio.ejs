@@ -35,8 +35,8 @@
             </div>
 
             <button id="play-btn" class="btn" data-playing="false" role="switch" aria-checked="false">
-				<span>Play/Pause</span>
-			</button>
+                <span>Play/Pause</span>
+            </button>
 
             <div>
                 <p>Volume</p>
@@ -46,6 +46,57 @@
             <div>
                 <p>Pan</p>
                 <input autocomplete="off" type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+            </div>
+
+            <div>
+                <p>Rate</p>
+                <input autocomplete="off"  type="range" min="0.5" max="2.0" name="tempoSlider" value="1.0"
+                    id="tempoSlider" step="0.25" list="temporange">
+                <datalist id="temporange">
+                    <option value="0.5" label="0.5">
+                    <option value="1.0">
+                    <option value="1.5">
+                    <option value="2.0" label="2">
+                </datalist>
+                <div id="tempo"></div>
+            </div>
+
+            <div>
+                <p>Pitch</p>
+                <input autocomplete="off" type="range" min="0.1" max="2.0" name="pitchSlider" value="1.0"
+                    id="pitchSlider" step="0.01" list="pitchrange">
+                <datalist id="pitchrange">
+                    <option value="0.1" label="0">
+                    <option value="0.5">
+                    <option value="1.0">
+                    <option value="1.5">
+                    <option value="2.0" label="2">
+                </datalist>
+                <div id="pitch"></div>
+            </div>
+
+            <div>
+                <p>Key</p>
+                <input autocomplete="off" type="range" min="-7.0" max="7.0" name="keySlider" value="0"
+                    id="keySlider" step="1" list="keyrange" />
+                <datalist id="keyrange">
+                    <option value="-7">
+                    <option value="-6">
+                    <option value="-5">
+                    <option value="-4">
+                    <option value="-3">
+                    <option value="-2">
+                    <option value="-1">
+                    <option value="0">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                    <option value="4">
+                    <option value="5">
+                    <option value="6">
+                    <option value="7">
+                </datalist>
+                <div id="key"></div>
             </div>
         </div>
     </section>
