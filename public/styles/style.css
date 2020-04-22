@@ -1,6 +1,6 @@
 body {
-  box-sizing: border-box;
   font: 16px Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
   background-color: #fcfcfc;
   color: #2f2f2f; }
 
@@ -33,17 +33,15 @@ input {
   border: none;
   background-image: none;
   background-color: transparent;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none; }
 
 pre {
   font-size: 0.8rem;
   overflow: scroll;
   padding: 1.1rem 0.9rem;
+  border-radius: 3px;
   background-color: #3d3d3d;
-  color: #dadee0;
-  border-radius: 3px; }
+  color: #dadee0; }
 
 header {
   margin: 6rem 0 4rem; }
@@ -71,7 +69,7 @@ footer {
   border: 1px solid #eaecee;
   box-shadow: 0 30px 40px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025); }
 
-#video_url {
+#video-url {
   min-height: 1.2rem;
   border: 2px solid #eaecee;
   padding: 0.6rem 0.5rem;
@@ -79,37 +77,38 @@ footer {
   width: 100%;
   margin: 0 0.6rem;
   transition: all 200ms ease 0s; }
-  #video_url:hover {
+  #video-url:hover {
     border: 2px solid #2f2f2f; }
-  #video_url:focus {
+  #video-url:focus {
     border: 2px solid black; }
 
 .audio-player {
-  margin-bottom: 2rem; }
+  margin-bottom: 1rem; }
   .audio-player .player-controls {
     width: 100%; }
     .audio-player .player-controls .track-title {
       font-size: 1.4rem;
-      margin: 0 0 0.5rem 0; }
+      margin: 0 0 1rem 0; }
     .audio-player .player-controls .player-time {
       display: flex;
       justify-content: space-between; }
-      .audio-player .player-controls .player-time #start-time,
-      .audio-player .player-controls .player-time #end-time {
-        padding: 0.6rem 0 0.2rem 0; }
     .audio-player .player-controls progress {
-      width: 100%; }
+      margin-top: 0.5rem;
+      width: 100%;
+      border-radius: 50px; }
     .audio-player .player-controls progress[value] {
       background-color: #fff;
       color: #2f2f2f;
-      height: 12px; }
+      height: 16px; }
     .audio-player .player-controls progress[value]::-webkit-progress-bar {
-      background-color: #fff;
-      border-radius: 2px;
+      background-color: #2f2f2f;
+      border-radius: 50px;
+      color: #2f2f2f; }
+    .audio-player .player-controls progress::-moz-progress-bar {
+      background-color: #2f2f2f;
+      border-radius: 50px;
       color: #2f2f2f; }
     .audio-player .player-controls progress::-webkit-progress-value {
-      background-color: #2f2f2f; }
-    .audio-player .player-controls progress::-moz-progress-bar {
       background-color: #2f2f2f; }
   .audio-player #play-btn {
     cursor: pointer;

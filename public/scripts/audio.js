@@ -2,22 +2,22 @@ console.log("hello from audio.js");
 
 // HTML element selection
 // audio element
-const player = document.querySelector("#audio");
+const player = document.getElementById("audio");
 // volume slider
-const volumeControl = document.querySelector("#volume");
+const volumeControl = document.getElementById("volume");
 // select pan slider
-const pannerControl = document.querySelector("#panner");
+const pannerControl = document.getElementById("panner");
 
 // create audio context
-const audioCtx = new AudioContext();
+const context = new AudioContext();
 
 // pass it into the audio context
-const track = audioCtx.createMediaElementSource(player);
+const track = context.createMediaElementSource(player);
 
 // context nodes
-const gainNode = new GainNode(audioCtx);
-const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
-const endNode = audioCtx.destination;
+const gainNode = new GainNode(context);
+const panNode = new StereoPannerNode(context, { pan: 0 });
+const endNode = context.destination;
 
 // context connections (audio graph)
 track.connect(gainNode).connect(panNode).connect(endNode);

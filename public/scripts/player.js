@@ -1,14 +1,14 @@
-const playerContainer = document.querySelector("#player-container");
-const player = document.querySelector("#audio");
-const playBtn = document.querySelector("#play-btn");
-const progressbar = document.querySelector("#seek-obj");
-const startTime = document.querySelector("#start-time");
-const endTime = document.querySelector("#end-time");
+const playerContainer = document.getElementById("player-container");
+const player = document.getElementById("audio");
+const playButton = document.getElementById("play-btn");
+const progressbar = document.getElementById("seek");
+const startTime = document.getElementById("start-time");
+const endTime = document.getElementById("end-time");
 
 let isPlaying = false;
 
 // play/pause button click
-playBtn.addEventListener(
+playButton.addEventListener(
   "click",
   function () {
     // play or pause track depending on state
@@ -32,7 +32,6 @@ player.addEventListener(
   false
 );
 
-
 // update progress bar
 player.addEventListener("timeupdate", () => {
   const length = player.duration;
@@ -53,6 +52,8 @@ player.addEventListener("timeupdate", () => {
 		progressbar.value = percent / 100;
 	});
 });
+
+// helpers
 
 function calculateTotalValue(length) {
   const minutes = Math.floor(length / 60);
