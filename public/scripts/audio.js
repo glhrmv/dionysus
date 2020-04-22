@@ -1,10 +1,17 @@
 console.log("hello from audio.js");
 
+// HTML element selection 
+// audio element
+const audioElement = document.querySelector("#audio");
+// play/pause button
+const playButton = document.querySelector("button");
+// volume slider
+const volumeControl = document.querySelector("#volume");
+// select pan slider
+const pannerControl = document.querySelector('#panner');
+
 // create audio context
 const audioContext = new AudioContext();
-
-// get the audio element
-const audioElement = document.querySelector("#audio");
 
 // pass it into the audio context
 const track = audioContext.createMediaElementSource(audioElement);
@@ -18,9 +25,9 @@ track.connect(gainNode);
 gainNode.connect(panNode);
 panNode.connect(audioContext.destination);
 
-// select play button
-const playButton = document.querySelector("button");
+// event listeners
 
+// play / pause control
 playButton.addEventListener(
   "click",
   function () {
@@ -39,9 +46,7 @@ playButton.addEventListener(
   false
 );
 
-// select volume slider
-const volumeControl = document.querySelector("#volume");
-
+// volume control
 volumeControl.addEventListener(
   "input",
   function () {
@@ -50,13 +55,12 @@ volumeControl.addEventListener(
   false
 );
 
-// select pan slider
-const pannerControl = document.querySelector('#panner');
-
+// pan control
 pannerControl.addEventListener('input', function() {
     panNode.pan.value = this.value;
 }, false);
 
+// audio element finish track
 audioElement.addEventListener(
   "ended",
   () => {
