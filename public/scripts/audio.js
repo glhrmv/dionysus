@@ -1,28 +1,27 @@
 console.log("hello from audio.js");
 
-// HTML element selection
-// audio element
+// element selection
 const player = document.getElementById("audio");
-// volume slider
 const volumeControl = document.getElementById("volume");
-// select pan slider
-const pannerControl = document.getElementById("panner");
+const panControl = document.getElementById("pan");
 
 // create audio context
 const context = new AudioContext();
 
-// pass it into the audio context
-const track = context.createMediaElementSource(player);
-
 // context nodes
+const startNode = new MediaElementAudioSourceNode(context, {
+  mediaElement: player,
+});
 const gainNode = new GainNode(context);
 const panNode = new StereoPannerNode(context, { pan: 0 });
 const endNode = context.destination;
 
 // context connections (audio graph)
-track.connect(gainNode).connect(panNode).connect(endNode);
+startNode.connect(gainNode).connect(panNode).connect(endNode);
 
+//
 // event listeners
+//
 
 // volume control
 volumeControl.addEventListener(
@@ -34,10 +33,94 @@ volumeControl.addEventListener(
 );
 
 // pan control
-pannerControl.addEventListener(
+panControl.addEventListener(
   "input",
   function () {
     panNode.pan.value = this.value;
   },
   false
 );
+
+//
+// player controls
+//
+
+const playButton = document.getElementById("play-btn");
+const progressBar = document.getElementById("seek");
+const startTime = document.getElementById("start-time");
+const endTime = document.getElementById("end-time");
+
+let isPlaying = false;
+
+// play/pause button click
+playButton.addEventListener(
+  "click",
+  function () {
+    // play or pause track depending on state
+    if (this.dataset.playing === "false") {
+      player.play();
+      this.dataset.playing = "true";
+    } else if (this.dataset.playing === "true") {
+      player.pause();
+      this.dataset.playing = "false";
+    }
+  },
+  false
+);
+
+// audio element finish track
+player.addEventListener(
+  "ended",
+  () => {
+    playButton.dataset.playing = "false";
+  },
+  false
+);
+
+// update progress bar
+player.addEventListener("timeupdate", () => {
+  const length = player.duration;
+  const current_time = player.currentTime;
+
+  // calculate total length of value
+  const totalLength = calculateTotalValue(length);
+  endTime.innerHTML = totalLength;
+
+  // calculate current value time
+  const currentTime = calculateCurrentValue(current_time);
+  startTime.innerHTML = currentTime;
+
+  progressBar.value = player.currentTime / player.duration;
+  progressBar.addEventListener("click", function (event) {
+    const percent = event.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    progressBar.value = percent / 100;
+  });
+});
+
+//
+// helpers
+//
+
+function calculateTotalValue(length) {
+  const minutes = Math.floor(length / 60);
+  const seconds_int = length - minutes * 60;
+  const seconds_str = seconds_int.toString();
+  const seconds = seconds_str.substr(0, 2);
+  const time = minutes + ":" + seconds;
+
+  return time;
+}
+
+function calculateCurrentValue(currentTime) {
+  const current_hour = parseInt(currentTime / 3600) % 24;
+  const current_minute = parseInt(currentTime / 60) % 60;
+  const current_seconds_long = currentTime % 60;
+  const current_seconds = current_seconds_long.toFixed();
+  const current_time =
+    (current_minute < 10 ? "0" + current_minute : current_minute) +
+    ":" +
+    (current_seconds < 10 ? "0" + current_seconds : current_seconds);
+
+  return current_time;
+}
