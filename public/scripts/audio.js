@@ -3,7 +3,9 @@ console.log("hello from audio.js");
 // element selection
 const player = document.getElementById("audio");
 const volumeControl = document.getElementById("volume");
+const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
+const panText = document.getElementById("pan-text");
 
 // create audio context
 const context = new AudioContext();
@@ -28,6 +30,7 @@ volumeControl.addEventListener(
   "input",
   function () {
     gainNode.gain.value = this.value;
+    volumeText.innerHTML = gainNode.gain.value.toFixed(3);
   },
   false
 );
@@ -37,9 +40,31 @@ panControl.addEventListener(
   "input",
   function () {
     panNode.pan.value = this.value;
+    panText.innerHTML = panNode.pan.value.toFixed(3);
+
   },
   false
 );
+
+// audio element finish track
+player.addEventListener(
+  "ended",
+  () => {
+    playButton.dataset.playing = "false";
+  },
+  false
+);
+
+player.addEventListener(
+  "play",
+  () => {
+    // init knob control values
+    volumeText.innerHTML = gainNode.gain.value.toFixed(3);
+    panText.innerHTML = panNode.pan.value.toFixed(3);
+  },
+  false
+);
+
 
 //
 // player controls
@@ -64,15 +89,6 @@ playButton.addEventListener(
       player.pause();
       this.dataset.playing = "false";
     }
-  },
-  false
-);
-
-// audio element finish track
-player.addEventListener(
-  "ended",
-  () => {
-    playButton.dataset.playing = "false";
   },
   false
 );

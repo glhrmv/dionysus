@@ -34,41 +34,45 @@
                 </div>
             </div>
 
-            <button id="play-btn" class="btn" data-playing="false" role="switch" aria-checked="false">
-                <span>Play/Pause</span>
-            </button>
+            <div class="controls">
+                <button id="play-btn" class="btn" data-playing="false" role="switch" aria-checked="false">
+                    <span>Play/Pause</span>
+                </button>
 
-            <div>
-                <p>Volume</p>
-                <input autocomplete="off" type="range" id="volume" min="0" max="2" value="1" step="0.01">
-                <span></span>
-            </div>
+                <div class="knobs">
+                    <div class="knob">
+                        <p class="knob-label">Volume</p>
+                        <input autocomplete="off" type="range" id="volume" min="0" max="2" value="1" step="0.01">
+                        <p class="knob-value" id="volume-text">-</p>
+                    </div>
 
-            <div>
-                <p>Pan</p>
-                <input autocomplete="off" type="range" id="pan" min="-1" max="1" value="0" step="0.01">
-                <span></span>
-            </div>
+                    <div class="knob">
+                        <p class="knob-label">Pan</p>
+                        <input autocomplete="off" type="range" id="pan" min="-1" max="1" value="0" step="0.01">
+                        <p class="knob-value" id="pan-text">-</p>
+                    </div>
 
-            <div>
-                <p>Tempo</p>
-                <input autocomplete="off" type="range" min="0.5" max="2.0" value="1.0" id="tempo" step="0.25"
-                    list="temporange">
-                <span></span>
-            </div>
+                    <div class="knob">
+                        <p class="knob-label">Tempo</p>
+                        <input autocomplete="off" type="range" min="0.5" max="2.0" value="1.0" id="tempo" step="0.25"
+                            list="temporange">
+                        <p class="knob-value" id="tempo-text">-</p>
+                    </div>
 
-            <div>
-                <p>Pitch</p>
-                <input autocomplete="off" type="range" min="0.1" max="2.0" value="1.0" id="pitch" step="0.01"
-                    list="pitchrange">
-                <span></span>
-            </div>
+                    <div class="knob">
+                        <p class="knob-label">Pitch</p>
+                        <input autocomplete="off" type="range" min="0.1" max="2.0" value="1.0" id="pitch" step="0.01"
+                            list="pitchrange">
+                        <p class="knob-value" id="pitch-text">-</p>
+                    </div>
 
-            <div>
-                <p>Key</p>
-                <input autocomplete="off" type="range" min="-7.0" max="7.0" value="0" id="key" step="1"
-                    list="keyrange" />
-                <span></span>
+                    <div class="knob">
+                        <p class="knob-label">Key</p>
+                        <input autocomplete="off" type="range" min="-7.0" max="7.0" value="0" id="key" step="1"
+                            list="keyrange" />
+                        <p class="knob-value" id="key-text">-</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
