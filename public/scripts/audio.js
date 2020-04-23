@@ -6,12 +6,11 @@ const volumeControl = document.getElementById("volume");
 const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
 const panText = document.getElementById("pan-text");
-const WIDTH = 640;
-const HEIGHT = 360;
 
 // create audio context
 const context = new AudioContext();
-let analyser = context.createAnalyser();
+let waveAnalyser = context.createAnalyser();
+let freqAnalyser = context.createAnalyser();
 
 // context nodes
 const startNode = new MediaElementAudioSourceNode(context, {
@@ -23,17 +22,31 @@ const endNode = context.destination;
 
 // context connections (audio graph)
 startNode.connect(gainNode).connect(panNode).connect(endNode);
-startNode.connect(analyser);
+startNode.connect(waveAnalyser);
+startNode.connect(freqAnalyser);
 
 
+// variables for waveform osciloscope
+waveAnalyser.fftSize = 2048;
+let waveBufferLength = waveAnalyser.frequencyBinCount;
+let waveDataArray = new Uint8Array(waveBufferLength);
+waveAnalyser.getByteTimeDomainData(waveDataArray);
+let waveCanvas = document.getElementById('waveform');
+let waveCanvasCtx = waveCanvas.getContext('2d');
+let waveCanvasWIDTH = waveCanvas.width;
+let waveCanvasHEIGHT = waveCanvas.height;
+waveCanvasCtx.clearRect(0, 0, waveCanvasWIDTH, waveCanvasHEIGHT);
 
-analyser.fftSize = 2048;
-let bufferLength = analyser.frequencyBinCount;
-let dataArray = new Uint8Array(bufferLength);
-analyser.getByteTimeDomainData(dataArray);
-let canvas = document.getElementById('spectrogram');
-let canvasCtx = canvas.getContext('2d');
-canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+//variables for the freq-bar
+freqAnalyser.fftSize = 256;
+let freqBufferLength = freqAnalyser.frequencyBinCount;
+console.log(freqBufferLength);
+let freqDataArray = new Uint8Array(freqBufferLength);
+let freqCanvas = document.getElementById('freqbar');
+let freqCanvasCtx = freqCanvas.getContext('2d');
+let freqCanvasWIDTH = freqCanvas.width;
+let freqCanvasHEIGHT = freqCanvas.height;
+freqCanvasCtx.clearRect(0, 0, freqCanvasWIDTH, freqCanvasHEIGHT);
 
 //
 // event listeners
@@ -100,6 +113,7 @@ playButton.addEventListener(
       player.play();
       this.dataset.playing = "true";
       drawWaveForm();
+      drawFreqBar();
     } else if (this.dataset.playing === "true") {
       player.pause();
       this.dataset.playing = "false";
@@ -109,34 +123,51 @@ playButton.addEventListener(
 );
 
 function drawWaveForm(){
-    draw();
-}
-
-function draw(){
-  let drawVisual = requestAnimationFrame(draw);
-  analyser.getByteTimeDomainData(dataArray);
-  canvasCtx.fillStyle = 'rgb(150, 170, 200)';
-  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-  canvasCtx.lineWidth = 2;
-  canvasCtx.strokeStyle = 'rgb(0, 0, 255)';
-  canvasCtx.beginPath();
-  let sliceWidth = WIDTH * 1.0 / bufferLength;
+  let drawVisual = requestAnimationFrame(drawWaveForm);
+  waveAnalyser.getByteTimeDomainData(waveDataArray);
+  waveCanvasCtx.fillStyle = 'rgb(0, 0 0)';
+  waveCanvasCtx.fillRect(0, 0, waveCanvasWIDTH, waveCanvasHEIGHT);
+  waveCanvasCtx.lineWidth = 2;
+  waveCanvasCtx.strokeStyle = 'rgb(255, 0, 0)';
+  waveCanvasCtx.beginPath();
+  let sliceWidth = waveCanvasWIDTH * 1.0 / waveBufferLength;
   let x = 0;
-  for(var i = 0; i < bufferLength; i++) {
+  for(var i = 0; i < waveBufferLength; i++) {
    
-    var v = dataArray[i] / 128.0;
-    var y = v * HEIGHT/2;
+    var v = waveDataArray[i] / 128.0;
+    var y = v * waveCanvasHEIGHT/2;
 
     if(i === 0) {
-      canvasCtx.moveTo(x, y);
+      waveCanvasCtx.moveTo(x, y);
     } else {
-      canvasCtx.lineTo(x, y);
+      waveCanvasCtx.lineTo(x, y);
     }
 
     x += sliceWidth;
   }
-  canvasCtx.lineTo(canvas.width, canvas.height/2);
-  canvasCtx.stroke();
+  waveCanvasCtx.lineTo(waveCanvasWIDTH,waveCanvasHEIGHT/2);
+  waveCanvasCtx.stroke();
+
+};
+
+function drawFreqBar(){
+  drawVisual = requestAnimationFrame(drawFreqBar);
+
+  freqAnalyser.getByteFrequencyData(freqDataArray);
+
+  freqCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
+  freqCanvasCtx.fillRect(0, 0, freqCanvasWIDTH, freqCanvasHEIGHT);
+  let barWidth = (freqCanvasWIDTH / freqBufferLength) * 2.5;
+  let barHeight;
+  let x = 0;
+  for(var i = 0; i < freqBufferLength; i++) {
+    barHeight = freqDataArray[i]/2;
+
+    freqCanvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
+    freqCanvasCtx.fillRect(x,freqCanvasHEIGHT-barHeight/2,barWidth,barHeight);
+
+    x += barWidth + 1;
+  }
 
 };
 
