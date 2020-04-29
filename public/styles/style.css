@@ -130,7 +130,9 @@ footer {
   width: 100%;
   text-align: center; }
   .viz canvas {
-    border-radius: 8px;
-    width: 80%; }
+    border-radius: 4px;
+    width: 80%;
+    color: #2f2f2f;
+    background-color: #fafafb; }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,13 +9,14 @@ const volumeControl = document.getElementById("volume");
 const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
 const panText = document.getElementById("pan-text");
-const waveCanvas = document.getElementById("waveform");
-const freqCanvas = document.getElementById("freqbar");
 
 const playButton = document.getElementById("play-btn");
 const progressBar = document.getElementById("seek");
 const startTime = document.getElementById("start-time");
 const endTime = document.getElementById("end-time");
+
+const waveCanvas = document.getElementById("waveform");
+const freqCanvas = document.getElementById("freqbar");
 
 // audio context
 const audioCtx = new AudioContext();
@@ -159,14 +160,14 @@ let waveCanvasHeight = waveCanvas.height;
 waveCanvasCtx.clearRect(0, 0, waveCanvasWidth, waveCanvasHeight);
 
 const drawWaveForm = () => {
-  let drawVisual = requestAnimationFrame(drawWaveForm);
-  
+  requestAnimationFrame(drawWaveForm);
   waveAnalyser.getByteTimeDomainData(waveDataArray);
-  waveCanvasCtx.fillStyle = "rgb(0, 0 0)";
-  waveCanvasCtx.fillRect(0, 0, waveCanvasWidth, waveCanvasHeight);
   waveCanvasCtx.lineWidth = 2;
-  waveCanvasCtx.strokeStyle = "rgb(255, 0, 0)";
+  
+  waveCanvasCtx.fillRect(0, 0, waveCanvasWidth, waveCanvasHeight);
+  waveCanvasCtx.strokeStyle = "rgb(0, 255, 0)";
   waveCanvasCtx.beginPath();
+  
   let sliceWidth = (waveCanvasWidth * 1.0) / waveBufferLength;
   let x = 0;
   for (let i = 0; i < waveBufferLength; i++) {
@@ -189,8 +190,7 @@ let freqCanvasHeight = freqCanvas.height;
 freqCanvasCtx.clearRect(0, 0, freqCanvasWidth, freqCanvasHeight);
 
 const drawFreqBar = () => {
-  drawVisual = requestAnimationFrame(drawFreqBar);
-
+  requestAnimationFrame(drawFreqBar);
   freqAnalyser.getByteFrequencyData(freqDataArray);
 
   freqCanvasCtx.fillStyle = "rgb(0, 0, 0)";
@@ -201,7 +201,7 @@ const drawFreqBar = () => {
   for (let i = 0; i < freqBufferLength; i++) {
     barHeight = freqDataArray[i] / 2;
 
-    freqCanvasCtx.fillStyle = "rgb(" + (barHeight + 100) + ",50,50)";
+    freqCanvasCtx.fillStyle = `rgb(50, ${barHeight + 100}, 50)`;
     freqCanvasCtx.fillRect(
       x,
       freqCanvasHeight - barHeight / 2,
