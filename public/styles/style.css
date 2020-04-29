@@ -125,4 +125,12 @@ footer {
       color: #b5b5b5;
       margin-top: 0.5rem; }
 
+.viz {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center; }
+  .viz canvas {
+    border-radius: 8px;
+    width: 80%; }
+
 /*# sourceMappingURL=style.css.map */

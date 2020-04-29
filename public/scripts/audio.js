@@ -1,52 +1,55 @@
 console.log("hello from audio.js");
 
+//
 // element selection
+//
+
 const player = document.getElementById("audio");
 const volumeControl = document.getElementById("volume");
 const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
 const panText = document.getElementById("pan-text");
+const waveCanvas = document.getElementById("waveform");
+const freqCanvas = document.getElementById("freqbar");
 
-// create audio context
-const context = new AudioContext();
-let waveAnalyser = context.createAnalyser();
-let freqAnalyser = context.createAnalyser();
+const playButton = document.getElementById("play-btn");
+const progressBar = document.getElementById("seek");
+const startTime = document.getElementById("start-time");
+const endTime = document.getElementById("end-time");
 
+// audio context
+const audioCtx = new AudioContext();
+
+//
 // context nodes
-const startNode = new MediaElementAudioSourceNode(context, {
+//
+
+const startNode = new MediaElementAudioSourceNode(audioCtx, {
   mediaElement: player,
 });
-const gainNode = new GainNode(context);
-const panNode = new StereoPannerNode(context, { pan: 0 });
-const endNode = context.destination;
+
+const gainNode = new GainNode(audioCtx);
+
+const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
+
+const waveAnalyser = new AnalyserNode(audioCtx, { fftSize: 2048 });
+const waveBufferLength = waveAnalyser.frequencyBinCount;
+const waveDataArray = new Uint8Array(waveBufferLength);
+waveAnalyser.getByteTimeDomainData(waveDataArray);
+
+const freqAnalyser = new AnalyserNode(audioCtx, { fftSize: 256 });
+const freqBufferLength = freqAnalyser.frequencyBinCount;
+const freqDataArray = new Uint8Array(freqBufferLength);
+
+const endNode = audioCtx.destination;
 
 // context connections (audio graph)
-startNode.connect(gainNode).connect(panNode).connect(endNode);
-startNode.connect(waveAnalyser);
-startNode.connect(freqAnalyser);
-
-
-// variables for waveform osciloscope
-waveAnalyser.fftSize = 2048;
-let waveBufferLength = waveAnalyser.frequencyBinCount;
-let waveDataArray = new Uint8Array(waveBufferLength);
-waveAnalyser.getByteTimeDomainData(waveDataArray);
-let waveCanvas = document.getElementById('waveform');
-let waveCanvasCtx = waveCanvas.getContext('2d');
-let waveCanvasWIDTH = waveCanvas.width;
-let waveCanvasHEIGHT = waveCanvas.height;
-waveCanvasCtx.clearRect(0, 0, waveCanvasWIDTH, waveCanvasHEIGHT);
-
-//variables for the freq-bar
-freqAnalyser.fftSize = 256;
-let freqBufferLength = freqAnalyser.frequencyBinCount;
-console.log(freqBufferLength);
-let freqDataArray = new Uint8Array(freqBufferLength);
-let freqCanvas = document.getElementById('freqbar');
-let freqCanvasCtx = freqCanvas.getContext('2d');
-let freqCanvasWIDTH = freqCanvas.width;
-let freqCanvasHEIGHT = freqCanvas.height;
-freqCanvasCtx.clearRect(0, 0, freqCanvasWIDTH, freqCanvasHEIGHT);
+startNode
+  .connect(gainNode)
+  .connect(panNode)
+  .connect(waveAnalyser)
+  .connect(freqAnalyser)
+  .connect(endNode);
 
 //
 // event listeners
@@ -68,7 +71,6 @@ panControl.addEventListener(
   function () {
     panNode.pan.value = this.value;
     panText.innerHTML = panNode.pan.value.toFixed(3);
-
   },
   false
 );
@@ -82,6 +84,7 @@ player.addEventListener(
   false
 );
 
+// on track play
 player.addEventListener(
   "play",
   () => {
@@ -91,18 +94,6 @@ player.addEventListener(
   },
   false
 );
-
-
-//
-// player controls
-//
-
-const playButton = document.getElementById("play-btn");
-const progressBar = document.getElementById("seek");
-const startTime = document.getElementById("start-time");
-const endTime = document.getElementById("end-time");
-
-let isPlaying = false;
 
 // play/pause button click
 playButton.addEventListener(
@@ -122,53 +113,18 @@ playButton.addEventListener(
   false
 );
 
-function drawWaveForm(){
-  let drawVisual = requestAnimationFrame(drawWaveForm);
-  waveAnalyser.getByteTimeDomainData(waveDataArray);
-  waveCanvasCtx.fillStyle = 'rgb(0, 0 0)';
-  waveCanvasCtx.fillRect(0, 0, waveCanvasWIDTH, waveCanvasHEIGHT);
-  waveCanvasCtx.lineWidth = 2;
-  waveCanvasCtx.strokeStyle = 'rgb(255, 0, 0)';
-  waveCanvasCtx.beginPath();
-  let sliceWidth = waveCanvasWIDTH * 1.0 / waveBufferLength;
-  let x = 0;
-  for(var i = 0; i < waveBufferLength; i++) {
-   
-    var v = waveDataArray[i] / 128.0;
-    var y = v * waveCanvasHEIGHT/2;
+//
+// player controls
+//
 
-    if(i === 0) {
-      waveCanvasCtx.moveTo(x, y);
-    } else {
-      waveCanvasCtx.lineTo(x, y);
-    }
+let isPlaying = false;
 
-    x += sliceWidth;
+// bind spacebar to play button
+document.onkeydown = function (e) {
+  if (e.keyCode == 32) {
+    e.preventDefault();
+    playButton.click();
   }
-  waveCanvasCtx.lineTo(waveCanvasWIDTH,waveCanvasHEIGHT/2);
-  waveCanvasCtx.stroke();
-
-};
-
-function drawFreqBar(){
-  drawVisual = requestAnimationFrame(drawFreqBar);
-
-  freqAnalyser.getByteFrequencyData(freqDataArray);
-
-  freqCanvasCtx.fillStyle = 'rgb(0, 0, 0)';
-  freqCanvasCtx.fillRect(0, 0, freqCanvasWIDTH, freqCanvasHEIGHT);
-  let barWidth = (freqCanvasWIDTH / freqBufferLength) * 2.5;
-  let barHeight;
-  let x = 0;
-  for(var i = 0; i < freqBufferLength; i++) {
-    barHeight = freqDataArray[i]/2;
-
-    freqCanvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-    freqCanvasCtx.fillRect(x,freqCanvasHEIGHT-barHeight/2,barWidth,barHeight);
-
-    x += barWidth + 1;
-  }
-
 };
 
 // update progress bar
@@ -193,6 +149,71 @@ player.addEventListener("timeupdate", () => {
 });
 
 //
+// visualizers
+//
+
+// waveform
+let waveCanvasCtx = waveCanvas.getContext("2d");
+let waveCanvasWidth = waveCanvas.width;
+let waveCanvasHeight = waveCanvas.height;
+waveCanvasCtx.clearRect(0, 0, waveCanvasWidth, waveCanvasHeight);
+
+const drawWaveForm = () => {
+  let drawVisual = requestAnimationFrame(drawWaveForm);
+  
+  waveAnalyser.getByteTimeDomainData(waveDataArray);
+  waveCanvasCtx.fillStyle = "rgb(0, 0 0)";
+  waveCanvasCtx.fillRect(0, 0, waveCanvasWidth, waveCanvasHeight);
+  waveCanvasCtx.lineWidth = 2;
+  waveCanvasCtx.strokeStyle = "rgb(255, 0, 0)";
+  waveCanvasCtx.beginPath();
+  let sliceWidth = (waveCanvasWidth * 1.0) / waveBufferLength;
+  let x = 0;
+  for (let i = 0; i < waveBufferLength; i++) {
+    let v = waveDataArray[i] / 128.0;
+    let y = (v * waveCanvasHeight) / 2;
+
+    if (i === 0) waveCanvasCtx.moveTo(x, y);
+    else waveCanvasCtx.lineTo(x, y);
+
+    x += sliceWidth;
+  }
+  waveCanvasCtx.lineTo(waveCanvasWidth, waveCanvasHeight / 2);
+  waveCanvasCtx.stroke();
+};
+
+// frequency spectrum
+let freqCanvasCtx = freqCanvas.getContext("2d");
+let freqCanvasWidth = freqCanvas.width;
+let freqCanvasHeight = freqCanvas.height;
+freqCanvasCtx.clearRect(0, 0, freqCanvasWidth, freqCanvasHeight);
+
+const drawFreqBar = () => {
+  drawVisual = requestAnimationFrame(drawFreqBar);
+
+  freqAnalyser.getByteFrequencyData(freqDataArray);
+
+  freqCanvasCtx.fillStyle = "rgb(0, 0, 0)";
+  freqCanvasCtx.fillRect(0, 0, freqCanvasWidth, freqCanvasHeight);
+  let barWidth = (freqCanvasWidth / freqBufferLength) * 2.5;
+  let barHeight;
+  let x = 0;
+  for (let i = 0; i < freqBufferLength; i++) {
+    barHeight = freqDataArray[i] / 2;
+
+    freqCanvasCtx.fillStyle = "rgb(" + (barHeight + 100) + ",50,50)";
+    freqCanvasCtx.fillRect(
+      x,
+      freqCanvasHeight - barHeight / 2,
+      barWidth,
+      barHeight
+    );
+
+    x += barWidth + 1;
+  }
+};
+
+//
 // helpers
 //
 
@@ -207,7 +228,7 @@ function calculateTotalValue(length) {
 }
 
 function calculateCurrentValue(currentTime) {
-  const current_hour = parseInt(currentTime / 3600) % 24;
+  // const current_hour = parseInt(currentTime / 3600) % 24;
   const current_minute = parseInt(currentTime / 60) % 60;
   const current_seconds_long = currentTime % 60;
   const current_seconds = current_seconds_long.toFixed();

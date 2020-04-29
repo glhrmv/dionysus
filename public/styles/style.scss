@@ -173,3 +173,14 @@ footer {
     }
   }
 }
+
+.viz {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+
+  canvas {
+    border-radius: 8px;
+    width: 80%;
+  }
+}

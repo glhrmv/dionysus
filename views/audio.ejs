@@ -13,14 +13,6 @@
 
     <section>
         <div class="box">
-            <p>Waveform / Osciloscope</p>
-            <canvas id="waveform" width="640" height="360" ></canvas>
-
-            <p>frequency bar graph</p>
-            <canvas id="freqbar" width="640" height="100" ></canvas>
-
-
-
             <div class="audio-player">
                 <div class="audio-wrapper" id="player-container" href="javascript:;">
                     <audio id="audio">
@@ -80,6 +72,18 @@
                             list="keyrange" />
                         <p class="knob-value" id="key-text">-</span>
                     </div>
+                </div>
+            </div>
+
+            <div class="visualizers">
+                <div class="viz">
+                    <p>Waveform</p>
+                    <canvas id="waveform" width="640" height="360"></canvas>
+                </div>
+
+                <div class="viz">
+                    <p>Frequency Spectrum</p>
+                    <canvas id="freqbar" width="640" height="100"></canvas>
                 </div>
             </div>
         </div>
