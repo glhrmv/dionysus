@@ -164,8 +164,9 @@ const drawWaveForm = () => {
   waveAnalyser.getByteTimeDomainData(waveDataArray);
   waveCanvasCtx.lineWidth = 2;
   
+  waveCanvasCtx.fillStyle = "rgb(250, 250, 251)";
   waveCanvasCtx.fillRect(0, 0, waveCanvasWidth, waveCanvasHeight);
-  waveCanvasCtx.strokeStyle = "rgb(0, 255, 0)";
+  waveCanvasCtx.strokeStyle = "rgb(47, 47, 47)";
   waveCanvasCtx.beginPath();
   
   let sliceWidth = (waveCanvasWidth * 1.0) / waveBufferLength;
@@ -193,7 +194,7 @@ const drawFreqBar = () => {
   requestAnimationFrame(drawFreqBar);
   freqAnalyser.getByteFrequencyData(freqDataArray);
 
-  freqCanvasCtx.fillStyle = "rgb(0, 0, 0)";
+  freqCanvasCtx.fillStyle = "rgb(250, 250, 251)";
   freqCanvasCtx.fillRect(0, 0, freqCanvasWidth, freqCanvasHeight);
   let barWidth = (freqCanvasWidth / freqBufferLength) * 2.5;
   let barHeight;
@@ -201,7 +202,7 @@ const drawFreqBar = () => {
   for (let i = 0; i < freqBufferLength; i++) {
     barHeight = freqDataArray[i] / 2;
 
-    freqCanvasCtx.fillStyle = `rgb(50, ${barHeight + 100}, 50)`;
+    freqCanvasCtx.fillStyle = `rgb(47, 47, 47)`;
     freqCanvasCtx.fillRect(
       x,
       freqCanvasHeight - barHeight / 2,

@@ -174,15 +174,22 @@ footer {
   }
 }
 
-.viz {
-  margin-top: 2rem;
-  width: 100%;
-  text-align: center;
+.visualizers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
 
-  canvas {
-    border-radius: 4px;
-    width: 80%;
-    color: #2f2f2f;
-    background-color: #fafafb;
+  .viz {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+  
+    canvas {
+      border: 2px solid #2f2f2f;
+      border-radius: 4px;
+      width: 80%;
+      color: #2f2f2f;
+      background-color: #fafafb;
+    }
   }
 }
+
