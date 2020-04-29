@@ -14,6 +14,11 @@ p {
 h1 {
   font-size: 2rem; }
 
+h4 {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #bdbdbd; }
+
 a {
   text-decoration: none;
   color: inherit; }
@@ -103,7 +108,7 @@ footer {
   .audio-player hr {
     margin: 0.5rem auto 1.5rem auto;
     height: 1px;
-    background-color: #2f2f2f;
+    background-color: #bdbdbd;
     max-width: 100%; }
   .audio-player .player-controls {
     width: 100%; }
@@ -135,8 +140,7 @@ footer {
 
 .knobs {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  margin-top: 1rem; }
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .knobs .knob {
     text-align: center; }
     .knobs .knob .knob-label {
@@ -150,7 +154,6 @@ footer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50%, 1fr)); }
   .visualizers .viz {
-    margin-top: 2rem;
     width: 100%;
     text-align: center; }
     .visualizers .viz canvas {
