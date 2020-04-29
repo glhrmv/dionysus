@@ -7,6 +7,10 @@ const volumeControl = document.getElementById("volume");
 const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
 const panText = document.getElementById("pan-text");
+const frequencyControl = document.getElementById("frequency");
+const frequencyText = document.getElementById("frequency-text");
+const qFactorControl = document.getElementById("q-factor");
+const qFactorText = document.getElementById("q-factor-text");
 
 const progressBar = document.getElementById("seek");
 const startTime = document.getElementById("start-time");
@@ -30,6 +34,8 @@ const gainNode = new GainNode(audioCtx);
 
 const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
 
+const filterNode = new BiquadFilterNode(audioCtx);
+
 const waveAnalyser = new AnalyserNode(audioCtx, { fftSize: 2048 });
 const waveBufferLength = waveAnalyser.frequencyBinCount;
 const waveDataArray = new Uint8Array(waveBufferLength);
@@ -45,6 +51,7 @@ const endNode = audioCtx.destination;
 startNode
   .connect(gainNode)
   .connect(panNode)
+  .connect(filterNode)
   .connect(waveAnalyser)
   .connect(freqAnalyser)
   .connect(endNode);
@@ -145,9 +152,9 @@ player.addEventListener(
 //
 
 // waveform
-let waveCanvasCtx = waveCanvas.getContext("2d");
-let waveCanvasWidth = waveCanvas.width;
-let waveCanvasHeight = waveCanvas.height;
+const waveCanvasCtx = waveCanvas.getContext("2d");
+const waveCanvasWidth = waveCanvas.width;
+const waveCanvasHeight = waveCanvas.height;
 waveCanvasCtx.clearRect(0, 0, waveCanvasWidth, waveCanvasHeight);
 
 const drawWaveForm = () => {
@@ -176,9 +183,9 @@ const drawWaveForm = () => {
 };
 
 // frequency spectrum
-let freqCanvasCtx = freqCanvas.getContext("2d");
-let freqCanvasWidth = freqCanvas.width;
-let freqCanvasHeight = freqCanvas.height;
+const freqCanvasCtx = freqCanvas.getContext("2d");
+const freqCanvasWidth = freqCanvas.width;
+const freqCanvasHeight = freqCanvas.height;
 freqCanvasCtx.clearRect(0, 0, freqCanvasWidth, freqCanvasHeight);
 
 const drawFreqBar = () => {
@@ -220,7 +227,6 @@ function calculateTotalValue(length) {
 }
 
 function calculateCurrentValue(currentTime) {
-  // const current_hour = parseInt(currentTime / 3600) % 24;
   const current_minute = parseInt(currentTime / 60) % 60;
   const current_seconds_long = currentTime % 60;
   const current_seconds = current_seconds_long.toFixed();

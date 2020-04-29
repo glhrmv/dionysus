@@ -34,11 +34,11 @@
                     </span>
                 </div>
 
-                <hr />
+                <!-- <hr /> -->
             </div>
 
-            <h4>Knobs</h4>
-            <div class="knobs">
+            <h4>Basic controls</h4>
+            <div class="controls">
                 <div class="knob">
                     <p class="knob-label">Volume</p>
                     <input autocomplete="off" type="range" id="volume" min="0" max="2" value="1" step="0.01">
@@ -73,10 +73,25 @@
                 </div>
             </div>
 
-            <h4>Filters</h4>
-            <div class="filters">
-                <div class="filter">
-
+            <h4>Filter</h4>
+            <div class="filter">
+                <div class="filter-type">
+                    <p>Type</p>
+                    <select autocomplete="off" name="filter" id="filter-select">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                    </select>
+                </div>
+                <div class="knob">
+                    <p class="knob-label">Frequency</p>
+                    <input autocomplete="off" type="range" id="frequency" min="20" max="20000" value="20000" step="10">
+                    <p class="knob-value" id="frequency-text">-</p>
+                </div>
+                <div class="knob">
+                    <p class="knob-label">Q-factor</p>
+                    <input autocomplete="off" type="range" id="q-factor" min="0" max="100" value="0" step="1">
+                    <p class="knob-value" id="q-factor-text">-</p>
                 </div>
             </div>
 
