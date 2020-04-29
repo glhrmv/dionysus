@@ -7,9 +7,13 @@
   <% include ../partials/header %>
 
   <section>
-    <h2><%= message %></h2>
-    <h3><%= error.status %></h3>
-    <pre><%= error.stack %></pre>
+    <pre>
+      <%= message %>
+
+      <%= error.stack %>
+
+      <%= error.stderr %>
+    </pre>
   </section>
 
 </body>
