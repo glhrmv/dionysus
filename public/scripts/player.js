@@ -2,11 +2,8 @@ import {
   player,
   startTime,
   endTime,
-  progressBar,
-  volumeText,
-  panText,
+  progressBar
 } from "./elements.js";
-import { gainNode, panNode } from "./context.js";
 import { drawWaveForm, drawFreqBar } from "./viz.js";
 
 //
@@ -14,14 +11,6 @@ import { drawWaveForm, drawFreqBar } from "./viz.js";
 //
 
 let isPlaying = false;
-
-// bind spacebar to play button
-document.onkeydown = function (e) {
-  if (e.keyCode == 32) {
-    e.preventDefault();
-    togglePlay();
-  }
-};
 
 const togglePlay = () => {
   if (!isPlaying) {
@@ -33,6 +22,14 @@ const togglePlay = () => {
   }
 
   isPlaying = !isPlaying;
+};
+
+// bind spacebar to play button
+document.onkeydown = function (e) {
+  if (e.keyCode == 32) {
+    e.preventDefault();
+    togglePlay();
+  }
 };
 
 // update progress bar
@@ -55,17 +52,6 @@ player.addEventListener("timeupdate", () => {
     progressBar.value = percent / 100;
   });
 });
-
-// on track play
-player.addEventListener(
-  "play",
-  () => {
-    // init knob control values
-    volumeText.innerHTML = gainNode.gain.value.toFixed(3);
-    panText.innerHTML = panNode.pan.value.toFixed(3);
-  },
-  false
-);
 
 // on track finish
 player.addEventListener(

@@ -7,6 +7,7 @@ export const volumeControl = document.getElementById("volume");
 export const volumeText = document.getElementById("volume-text");
 export const panControl = document.getElementById("pan");
 export const panText = document.getElementById("pan-text");
+export const filterType = document.getElementById("filter-type");
 export const frequencyControl = document.getElementById("frequency");
 export const frequencyText = document.getElementById("frequency-text");
 export const qFactorControl = document.getElementById("q-factor");
