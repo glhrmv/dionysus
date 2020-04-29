@@ -1,5 +1,3 @@
-console.log("hello from audio.js");
-
 //
 // element selection
 //
@@ -10,7 +8,6 @@ const volumeText = document.getElementById("volume-text");
 const panControl = document.getElementById("pan");
 const panText = document.getElementById("pan-text");
 
-const playButton = document.getElementById("play-btn");
 const progressBar = document.getElementById("seek");
 const startTime = document.getElementById("start-time");
 const endTime = document.getElementById("end-time");
@@ -76,44 +73,6 @@ panControl.addEventListener(
   false
 );
 
-// audio element finish track
-player.addEventListener(
-  "ended",
-  () => {
-    playButton.dataset.playing = "false";
-  },
-  false
-);
-
-// on track play
-player.addEventListener(
-  "play",
-  () => {
-    // init knob control values
-    volumeText.innerHTML = gainNode.gain.value.toFixed(3);
-    panText.innerHTML = panNode.pan.value.toFixed(3);
-  },
-  false
-);
-
-// play/pause button click
-playButton.addEventListener(
-  "click",
-  function () {
-    // play or pause track depending on state
-    if (this.dataset.playing === "false") {
-      player.play();
-      this.dataset.playing = "true";
-      drawWaveForm();
-      drawFreqBar();
-    } else if (this.dataset.playing === "true") {
-      player.pause();
-      this.dataset.playing = "false";
-    }
-  },
-  false
-);
-
 //
 // player controls
 //
@@ -124,8 +83,20 @@ let isPlaying = false;
 document.onkeydown = function (e) {
   if (e.keyCode == 32) {
     e.preventDefault();
-    playButton.click();
+    togglePlay();
   }
+};
+
+const togglePlay = () => {
+  if (!isPlaying) {
+    player.play();
+    drawWaveForm();
+    drawFreqBar();
+  } else {
+    player.pause();
+  }
+
+  isPlaying = !isPlaying;
 };
 
 // update progress bar
@@ -149,6 +120,26 @@ player.addEventListener("timeupdate", () => {
   });
 });
 
+// on track play
+player.addEventListener(
+  "play",
+  () => {
+    // init knob control values
+    volumeText.innerHTML = gainNode.gain.value.toFixed(3);
+    panText.innerHTML = panNode.pan.value.toFixed(3);
+  },
+  false
+);
+
+// on track finish
+player.addEventListener(
+  "ended",
+  () => {
+    isPlaying = false;
+  },
+  false
+);
+
 //
 // visualizers
 //
@@ -163,12 +154,12 @@ const drawWaveForm = () => {
   requestAnimationFrame(drawWaveForm);
   waveAnalyser.getByteTimeDomainData(waveDataArray);
   waveCanvasCtx.lineWidth = 2;
-  
+
   waveCanvasCtx.fillStyle = "rgb(250, 250, 251)";
   waveCanvasCtx.fillRect(0, 0, waveCanvasWidth, waveCanvasHeight);
   waveCanvasCtx.strokeStyle = "rgb(47, 47, 47)";
   waveCanvasCtx.beginPath();
-  
+
   let sliceWidth = (waveCanvasWidth * 1.0) / waveBufferLength;
   let x = 0;
   for (let i = 0; i < waveBufferLength; i++) {

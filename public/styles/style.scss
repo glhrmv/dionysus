@@ -44,6 +44,20 @@ input {
   box-shadow: none;
 }
 
+code {
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #3d3d3d;
+  border-radius: 4px;
+  font-size: 1rem;
+  height: 2em;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.25rem;
+  white-space: nowrap;
+}
+
 pre {
   font-size: 0.8rem;
   overflow: scroll;
@@ -105,10 +119,20 @@ footer {
 }
 
 .audio-player {
-  margin-bottom: 1rem;
+  padding: 1.5rem 0 0 0;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+
+  hr {
+    margin: 0.5rem auto 1.5rem auto;
+    height: 1px;
+    background-color: #2f2f2f;
+    max-width: 100%;
+  }
 
   .player-controls {
-    width: 100%; 
+    width: 100%;
 
     .track-title {
       font-size: 1.4rem;
@@ -138,38 +162,35 @@ footer {
       border-radius: 50px;
       color: #2f2f2f;
     }
-    
+
     progress::-moz-progress-bar {
       background-color: #2f2f2f;
       border-radius: 50px;
       color: #2f2f2f;
     }
-    
+
     progress::-webkit-progress-value {
       background-color: #2f2f2f;
     }
   }
 }
 
-.controls {
-  .knobs {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+.knobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  margin-top: 1rem;
 
-    margin-top: 2rem;
+  .knob {
+    text-align: center;
 
-    .knob {
-      text-align: center;
+    .knob-label {
+      margin-bottom: 0.5rem;
+    }
 
-      .knob-label {
-        margin-bottom: 0.5rem;
-      }
-
-      .knob-value {
-        font-size: 0.9rem;
-        color: #b5b5b5;
-        margin-top: 0.5rem;
-      }
+    .knob-value {
+      font-size: 0.9rem;
+      color: #b5b5b5;
+      margin-top: 0.5rem;
     }
   }
 }
@@ -182,7 +203,7 @@ footer {
     margin-top: 2rem;
     width: 100%;
     text-align: center;
-  
+
     canvas {
       border: 2px solid #2f2f2f;
       border-radius: 4px;
@@ -192,4 +213,3 @@ footer {
     }
   }
 }
-
