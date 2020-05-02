@@ -1,5 +1,5 @@
-import { waveCanvas, freqCanvas } from './elements.js';
-import { waveAnalyserNode, freqAnalyserNode } from './context.js'
+import { waveCanvas, freqCanvas, spectroCanvas } from './elements.js';
+import { waveAnalyserNode, freqAnalyserNode, spectrumAnalyserNode } from './context.js'
 
 //
 // visualizers
@@ -71,4 +71,28 @@ export const drawFreqBar = () => {
 
     x += barWidth + 1;
   }
+};
+const spectrum = new Uint8Array(spectrumAnalyserNode.frequencyBinCount);
+export const updateSpectrum = () => {
+  requestAnimationFrame(updateSpectrum);
+  spectrumAnalyserNode.getByteFrequencyData(spectrum);
+};
+
+spectroCanvas.width = spectrum.length;
+spectroCanvas.height = 200;
+const spectroContext = spectroCanvas.getContext('2d');
+let spectroOffset = 0;
+
+export const drawSpectrogram = () => {
+  requestAnimationFrame(drawSpectrogram);
+  const slice = spectroContext.getImageData(0, spectroOffset, spectroCanvas.width, 1);
+  for (let i = 0; i < spectrum.length; i++) {
+    slice.data[4 * i + 0] = spectrum[i] // R
+    slice.data[4 * i + 1] = spectrum[i] // G
+    slice.data[4 * i + 2] = spectrum[i] // B
+    slice.data[4 * i + 3] = 255         // A
+  }
+  spectroContext.putImageData(slice, 0, spectroOffset);
+  spectroOffset += 1;
+  spectroOffset %= spectroCanvas.height;
 };

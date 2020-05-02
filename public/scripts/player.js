@@ -4,7 +4,7 @@ import {
   endTime,
   progressBar
 } from "./elements.js";
-import { drawWaveForm, drawFreqBar } from "./viz.js";
+import { drawWaveForm, drawFreqBar, drawSpectrogram, updateSpectrum } from "./viz.js";
 
 //
 // player controls
@@ -12,11 +12,14 @@ import { drawWaveForm, drawFreqBar } from "./viz.js";
 
 let isPlaying = false;
 
+drawWaveForm();
+drawFreqBar();
+updateSpectrum();
+drawSpectrogram();
+
 const togglePlay = () => {
   if (!isPlaying) {
     player.play();
-    drawWaveForm();
-    drawFreqBar();
   } else {
     player.pause();
   }
