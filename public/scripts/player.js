@@ -67,6 +67,7 @@ player.addEventListener(
   "ended",
   () => {
     isPlaying = false;
+    playBtn.classList.toggle("play-btn--playing");
   },
   false
 );
