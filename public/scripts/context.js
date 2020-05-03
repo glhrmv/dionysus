@@ -12,7 +12,7 @@ export const startNode = new MediaElementAudioSourceNode(audioCtx, {
 });
 export const gainNode = new GainNode(audioCtx);
 export const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
-export const filterNode = new BiquadFilterNode(audioCtx, { frequency: 20000});
+export const filterNode = new BiquadFilterNode(audioCtx, { frequency: 20000 });
 export const waveAnalyserNode = new AnalyserNode(audioCtx, { fftSize: 2048 });
 export const freqAnalyserNode = new AnalyserNode(audioCtx, { fftSize: 256 });
 export const spectrumAnalyserNode = new AnalyserNode(audioCtx);

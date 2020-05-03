@@ -19,4 +19,4 @@ export const endTime = document.getElementById("end-time");
 
 export const waveCanvas = document.getElementById("waveform");
 export const freqCanvas = document.getElementById("freqbar");
-export const spectroCanvas = document.getElementById("spectrogram");
+export const spectoCanvas = document.getElementById("spectogram");

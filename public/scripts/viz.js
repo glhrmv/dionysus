@@ -1,4 +1,4 @@
-import { waveCanvas, freqCanvas, spectroCanvas } from './elements.js';
+import { waveCanvas, freqCanvas, spectoCanvas } from './elements.js';
 import { waveAnalyserNode, freqAnalyserNode, spectrumAnalyserNode } from './context.js'
 
 //
@@ -72,27 +72,31 @@ export const drawFreqBar = () => {
     x += barWidth + 1;
   }
 };
+
+// spectoogram
 const spectrum = new Uint8Array(spectrumAnalyserNode.frequencyBinCount);
 export const updateSpectrum = () => {
   requestAnimationFrame(updateSpectrum);
   spectrumAnalyserNode.getByteFrequencyData(spectrum);
 };
 
-spectroCanvas.width = spectrum.length;
-spectroCanvas.height = 200;
-const spectroContext = spectroCanvas.getContext('2d');
-let spectroOffset = 0;
+const spectoCanvasCtx = spectoCanvas.getContext('2d');
+// spectoCanvas.width = spectrum.length;
+const spectoCanvasWidth = spectoCanvas.width;
+const spectoCanvasHeight = spectoCanvas.height;
+spectoCanvasCtx.clearRect(0, 0, spectoCanvasWidth, spectoCanvasHeight);
 
-export const drawSpectrogram = () => {
-  requestAnimationFrame(drawSpectrogram);
-  const slice = spectroContext.getImageData(0, spectroOffset, spectroCanvas.width, 1);
+let spectoOffset = 0;
+export const drawSpectogram = () => {
+  requestAnimationFrame(drawSpectogram);
+  const slice = spectoCanvasCtx.getImageData(0, spectoOffset, spectoCanvas.width, 1);
   for (let i = 0; i < spectrum.length; i++) {
     slice.data[4 * i + 0] = spectrum[i] // R
     slice.data[4 * i + 1] = spectrum[i] // G
     slice.data[4 * i + 2] = spectrum[i] // B
     slice.data[4 * i + 3] = 255         // A
   }
-  spectroContext.putImageData(slice, 0, spectroOffset);
-  spectroOffset += 1;
-  spectroOffset %= spectroCanvas.height;
+  spectoCanvasCtx.putImageData(slice, 0, spectoOffset);
+  spectoOffset += 1;
+  spectoOffset %= spectoCanvas.height;
 };

@@ -161,17 +161,27 @@ footer {
   .filter select {
     width: 60%; }
 
-.visualizers {
+.visualizers .viz-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50%, 1fr)); }
-  .visualizers .viz {
+
+.visualizers .freqbar, .visualizers .waveform {
+  width: 100%;
+  text-align: center; }
+  .visualizers .freqbar canvas, .visualizers .waveform canvas {
+    width: 80%;
+    border: 2px solid #2f2f2f;
+    border-radius: 4px;
+    color: #2f2f2f;
+    background-color: #fafafb; }
+
+.visualizers .spectogram {
+  text-align: center; }
+  .visualizers .spectogram canvas {
     width: 100%;
-    text-align: center; }
-    .visualizers .viz canvas {
-      border: 2px solid #2f2f2f;
-      border-radius: 4px;
-      width: 80%;
-      color: #2f2f2f;
-      background-color: #fafafb; }
+    border: 2px solid #2f2f2f;
+    border-radius: 4px;
+    color: #2f2f2f;
+    background-color: #fafafb; }
 
 /*# sourceMappingURL=style.css.map */
