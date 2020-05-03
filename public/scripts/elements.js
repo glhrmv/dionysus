@@ -13,6 +13,7 @@ export const frequencyText = document.getElementById("frequency-text");
 export const qFactorControl = document.getElementById("q-factor");
 export const qFactorText = document.getElementById("q-factor-text");
 
+export const playBtn = document.getElementById("play-btn");
 export const progressBar = document.getElementById("seek");
 export const startTime = document.getElementById("start-time");
 export const endTime = document.getElementById("end-time");

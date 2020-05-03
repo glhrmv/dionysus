@@ -130,11 +130,105 @@ footer {
   position: sticky;
   top: 0;
 
-  hr {
-    margin: 0.5rem auto 1.5rem auto;
-    height: 1px;
-    background-color: #bdbdbd;
-    max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+
+  .left {
+    justify-self: center;
+    align-self: center;
+  }
+
+  .play-btn {
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &__icon {
+      $size: 30px;
+      height: $size;
+      width: $size;
+      line-height: $size;
+      position: relative;
+      z-index: 0;
+      box-sizing: border-box;
+      display: inline-block;
+      overflow: hidden;
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        transition: 0.3s;
+        background: #2f2f2f;
+        height: 100%;
+        width: 50%;
+        top: 0;
+      }
+
+      &:before {
+        left: 0;
+      }
+
+      &:after {
+        right: 0;
+      }
+    }
+
+    &__mask {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      &:before,
+      &:after {
+        content: "";
+        background: #fff;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 150%;
+        transition: all 0.3s ease-out;
+      }
+
+      &:before {
+        top: -100%;
+        transform-origin: 0% 100%;
+        transform: rotate(26.5deg);
+      }
+
+      &:after {
+        transform-origin: 0% 0%;
+        transform: rotate(-26.5deg);
+        top: 100%;
+      }
+    }
+
+    &--playing {
+      .play-btn {
+        &__icon {
+          &:before {
+            transform: translateX(-25%);
+          }
+
+          &:after {
+            transform: translateX(25%);
+          }
+        }
+
+        &__mask {
+          &:before,
+          &:after {
+            transform: rotate(0);
+          }
+        }
+      }
+    }
   }
 
   .player-controls {
@@ -217,11 +311,12 @@ footer {
 
 .visualizers {
   .viz-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
   }
 
-  .freqbar, .waveform {
+  .freqbar,
+  .waveform {
     width: 100%;
     text-align: center;
 

@@ -1,5 +1,6 @@
 import {
   player,
+  playBtn,
   startTime,
   endTime,
   progressBar
@@ -23,7 +24,8 @@ const togglePlay = () => {
   } else {
     player.pause();
   }
-
+  
+  playBtn.classList.toggle("play-btn--playing");
   isPlaying = !isPlaying;
 };
 
@@ -34,6 +36,10 @@ document.onkeydown = function (e) {
     togglePlay();
   }
 };
+
+playBtn.addEventListener("click", () => {
+  togglePlay();
+}, false);
 
 // update progress bar
 player.addEventListener("timeupdate", () => {
@@ -54,7 +60,7 @@ player.addEventListener("timeupdate", () => {
     player.currentTime = percent * player.duration;
     progressBar.value = percent / 100;
   });
-});
+}, false);
 
 // on track finish
 player.addEventListener(
