@@ -15,7 +15,7 @@ export const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
 export const filterNode = new BiquadFilterNode(audioCtx, { frequency: 20000 });
 export const waveAnalyserNode = new AnalyserNode(audioCtx, { fftSize: 2048 });
 export const freqAnalyserNode = new AnalyserNode(audioCtx, { fftSize: 256 });
-export const spectrumAnalyserNode = new AnalyserNode(audioCtx);
+export const spectrogramAnalyserNode = new AnalyserNode(audioCtx, { fftSize: 2048 });
 export const endNode = audioCtx.destination;
 
 // context connections (audio graph)
@@ -25,7 +25,7 @@ startNode
   .connect(filterNode)
   .connect(waveAnalyserNode)
   .connect(freqAnalyserNode)
-  .connect(spectrumAnalyserNode)
+  .connect(spectrogramAnalyserNode)
   .connect(endNode);
 
 export default audioCtx;
