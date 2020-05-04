@@ -208,15 +208,21 @@ footer {
     color: #b5b5b5;
     margin-top: 0.5rem; }
 
-.filter {
+.filter,
+.effects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
   text-align: center;
   justify-items: center; }
-  .filter .filter-type {
+  .filter .filter-type,
+  .effects .filter-type {
     width: 100%; }
-  .filter select {
+  .filter select,
+  .effects select {
     width: 60%; }
+
+.effects .knob-label {
+  font-size: x-small; }
 
 .visualizers .viz-row {
   display: grid;
