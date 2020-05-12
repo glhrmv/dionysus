@@ -1,5 +1,9 @@
-import { waveCanvas, freqCanvas, spectoCanvas } from './elements.js';
-import { waveAnalyserNode, freqAnalyserNode, spectrogramAnalyserNode } from './context.js'
+import { waveCanvas, freqCanvas, spectoCanvas } from "./elements.js";
+import {
+  waveAnalyserNode,
+  freqAnalyserNode,
+  spectrogramAnalyserNode,
+} from "./context.js";
 
 //
 // visualizers
@@ -66,7 +70,7 @@ export const drawFreqBar = () => {
       x,
       freqCanvasHeight - barHeight / 2,
       barWidth,
-      barHeight
+      barHeight,
     );
 
     x += barWidth + 1;
@@ -74,27 +78,39 @@ export const drawFreqBar = () => {
 };
 
 // spectoogram
-const spectrum = new Uint8Array(spectrogramAnalyserNode.frequencyBinCount);
+const spectrum = new Uint8Array(
+  spectrogramAnalyserNode.frequencyBinCount,
+);
 export const updateSpectrum = () => {
   requestAnimationFrame(updateSpectrum);
   spectrogramAnalyserNode.getByteFrequencyData(spectrum);
 };
 
-const spectoCanvasCtx = spectoCanvas.getContext('2d');
+const spectoCanvasCtx = spectoCanvas.getContext("2d");
 // spectoCanvas.width = spectrum.length;
 const spectoCanvasWidth = spectoCanvas.width;
 const spectoCanvasHeight = spectoCanvas.height;
-spectoCanvasCtx.clearRect(0, 0, spectoCanvasWidth, spectoCanvasHeight);
+spectoCanvasCtx.clearRect(
+  0,
+  0,
+  spectoCanvasWidth,
+  spectoCanvasHeight,
+);
 
 let spectoOffset = 0;
 export const drawSpectogram = () => {
   requestAnimationFrame(drawSpectogram);
-  const slice = spectoCanvasCtx.getImageData(0, spectoOffset, spectoCanvas.width, 1);
+  const slice = spectoCanvasCtx.getImageData(
+    0,
+    spectoOffset,
+    spectoCanvas.width,
+    1,
+  );
   for (let i = 0; i < spectrum.length; i++) {
-    slice.data[4 * i + 0] = spectrum[i] // R
-    slice.data[4 * i + 1] = spectrum[i] // G
-    slice.data[4 * i + 2] = spectrum[i] // B
-    slice.data[4 * i + 3] = 255         // A
+    slice.data[4 * i + 0] = spectrum[i]; // R
+    slice.data[4 * i + 1] = spectrum[i]; // G
+    slice.data[4 * i + 2] = spectrum[i]; // B
+    slice.data[4 * i + 3] = 255; // A
   }
   spectoCanvasCtx.putImageData(slice, 0, spectoOffset);
   spectoOffset += 1;

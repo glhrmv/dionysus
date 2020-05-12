@@ -3,9 +3,14 @@ import {
   playBtn,
   startTime,
   endTime,
-  progressBar
+  progressBar,
 } from "./elements.js";
-import { drawWaveForm, drawFreqBar, drawSpectogram, updateSpectrum } from "./viz.js";
+import {
+  drawWaveForm,
+  drawFreqBar,
+  drawSpectogram,
+  updateSpectrum,
+} from "./viz.js";
 
 //
 // player controls
@@ -24,7 +29,7 @@ const togglePlay = () => {
   } else {
     player.pause();
   }
-  
+
   playBtn.classList.toggle("play-btn--playing");
   isPlaying = !isPlaying;
 };
@@ -37,30 +42,38 @@ document.onkeydown = function (e) {
   }
 };
 
-playBtn.addEventListener("click", () => {
-  togglePlay();
-}, false);
+playBtn.addEventListener(
+  "click",
+  () => {
+    togglePlay();
+  },
+  false,
+);
 
 // update progress bar
-player.addEventListener("timeupdate", () => {
-  const length = player.duration;
-  const current_time = player.currentTime;
+player.addEventListener(
+  "timeupdate",
+  () => {
+    const length = player.duration;
+    const current_time = player.currentTime;
 
-  // calculate total length of value
-  const totalLength = calculateTotalValue(length);
-  endTime.innerHTML = totalLength;
+    // calculate total length of value
+    const totalLength = calculateTotalValue(length);
+    endTime.innerHTML = totalLength;
 
-  // calculate current value time
-  const currentTime = calculateCurrentValue(current_time);
-  startTime.innerHTML = currentTime;
+    // calculate current value time
+    const currentTime = calculateCurrentValue(current_time);
+    startTime.innerHTML = currentTime;
 
-  progressBar.value = player.currentTime / player.duration;
-  progressBar.addEventListener("click", function (e) {
-    const percent = e.offsetX / this.offsetWidth;
-    player.currentTime = percent * player.duration;
-    progressBar.value = percent / 100;
-  });
-}, false);
+    progressBar.value = player.currentTime / player.duration;
+    progressBar.addEventListener("click", function (e) {
+      const percent = e.offsetX / this.offsetWidth;
+      player.currentTime = percent * player.duration;
+      progressBar.value = percent / 100;
+    });
+  },
+  false,
+);
 
 // on track finish
 player.addEventListener(
@@ -69,7 +82,7 @@ player.addEventListener(
     isPlaying = false;
     playBtn.classList.toggle("play-btn--playing");
   },
-  false
+  false,
 );
 
 //

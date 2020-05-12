@@ -16,8 +16,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res, next) => {
   const videoId = parseVideoId(req.body.videoUrl);
 
-  if (!fs.existsSync(audioFolder))
-    fs.mkdirSync(audioFolder);
+  if (!fs.existsSync(audioFolder)) fs.mkdirSync(audioFolder);
 
   // If we already have this video downloaded, just redirect to audio page
   if (fs.existsSync(path.join(audioFolder, `${videoId}.mp3`)))
@@ -28,7 +27,7 @@ router.post("/", (req, res, next) => {
     "--audio-format",
     "mp3",
     "-o",
-    '%(id)s.%(ext)s',
+    "%(id)s.%(ext)s",
   ];
 
   const options = {
@@ -52,7 +51,7 @@ router.get("/audio", async (req, res, next) => {
   // If video with specified id has not been downloaded, redirect back to index
   if (
     !fs.existsSync(
-      path.join(__dirname, "..", `/public/audio/${req.query.id}.mp3`)
+      path.join(__dirname, "..", `/public/audio/${req.query.id}.mp3`),
     )
   )
     return res.redirect("/");
