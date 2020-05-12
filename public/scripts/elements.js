@@ -2,39 +2,39 @@
 // HTML element selection
 //
 
-const $ = (id) => document.getElementById(id);
+const getById = (id) => document.getElementById(id);
 
-export const player = $("audio");
-export const volumeControl = $("volume");
-export const volumeText = $("volume-text");
-export const panControl = $("pan");
-export const panText = $("pan-text");
-export const filterType = $("filter-type");
-export const frequencyControl = $("frequency");
-export const frequencyText = $("frequency-text");
-export const qFactorControl = $("q-factor");
-export const qFactorText = $("q-factor-text");
+export const player = getById("audio");
+export const volumeControl = getById("volume");
+export const volumeText = getById("volume-text");
+export const panControl = getById("pan");
+export const panText = getById("pan-text");
+export const filterType = getById("filter-type");
+export const frequencyControl = getById("frequency");
+export const frequencyText = getById("frequency-text");
+export const qFactorControl = getById("q-factor");
+export const qFactorText = getById("q-factor-text");
 
 //effects
 //delay
-export const delayTimeControl = $("delayTime");
-export const delayTimeText = $("delayTime-text");
-export const feedbackControl = $("feedback");
-export const feedbackText = $("feedback-text");
+export const delayTimeControl = getById("delayTime");
+export const delayTimeText = getById("delayTime-text");
+export const feedbackControl = getById("feedback");
+export const feedbackText = getById("feedback-text");
 //reverb
-export const preDelayControl = $("pre-delay");
-export const preDelayText = $("pre-delay-text");
-export const decayControl = $("decay");
-export const decayText = $("decay-text");
+export const preDelayControl = getById("pre-delay");
+export const preDelayText = getById("pre-delay-text");
+export const decayControl = getById("decay");
+export const decayText = getById("decay-text");
 //bitcrush
-export const bitcrushControl = $("bitcrush");
-export const bitcrushText = $("bitcrush-text");
+export const bitcrushControl = getById("bitcrush");
+export const bitcrushText = getById("bitcrush-text");
 
-export const playBtn = $("play-btn");
-export const progressBar = $("seek");
-export const startTime = $("start-time");
-export const endTime = $("end-time");
+export const playBtn = getById("play-btn");
+export const progressBar = getById("seek");
+export const startTime = getById("start-time");
+export const endTime = getById("end-time");
 
-export const waveCanvas = $("waveform");
-export const freqCanvas = $("freqbar");
-export const spectoCanvas = $("spectogram");
+export const waveCanvas = getById("waveform");
+export const freqCanvas = getById("freqbar");
+export const spectoCanvas = getById("spectogram");
