@@ -26,6 +26,8 @@ export const preDelayControl = getById("pre-delay");
 export const preDelayText = getById("pre-delay-text");
 export const decayControl = getById("decay");
 export const decayText = getById("decay-text");
+export const reverbWetControl = getById("reverb-wet");
+export const reverbWetText = getById("reverb-wet-text");
 //bitcrush
 export const bitcrushControl = getById("bitcrush");
 export const bitcrushText = getById("bitcrush-text");

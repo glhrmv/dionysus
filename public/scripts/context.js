@@ -17,7 +17,11 @@ export const filterNode = new BiquadFilterNode(audioCtx, {
   frequency: 20000,
 });
 export const reverbNode = new Tone.Reverb();
-reverbNode.wet.value = 0.8;
+reverbNode.wet.value = 0.6;
+reverbNode.preDelay = 0;
+reverbNode.Decay = 0;
+
+reverbNode.generate();
 
 export const waveAnalyserNode = new AnalyserNode(audioCtx, {
   fftSize: 2048,

@@ -18,8 +18,10 @@ import {
   preDelayText,
   decayControl,
   decayText,
+  reverbWetControl,
+  reverbWetText,
 } from "./elements.js";
-import { gainNode, panNode, filterNode } from "./context.js";
+import { gainNode, panNode, filterNode, reverbNode } from "./context.js";
 
 //
 // init
@@ -34,6 +36,7 @@ delayTimeText.innerHTML = delayTimeControl.value;
 feedbackText.innerHTML = feedbackControl.value;
 preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
+reverbWetText.innerHTML = reverbWetControl.value;
 bitcrushText.innerHTML = bitcrushControl.value;
 
 //
@@ -111,7 +114,10 @@ preDelayControl.addEventListener(
   function () {
     //bitcrushNode.bits = this.value;
     //bitcrushText.innerHTML = bitcrushNode.bits;
-    preDelayText.innerHTML = this.value;
+   
+    reverbNode.preDelay = this.value;
+    preDelayText.innerHTML = reverbNode.preDelay;
+    
   },
   false,
 );
@@ -121,7 +127,20 @@ decayControl.addEventListener(
   function () {
     //bitcrushNode.bits = this.value;
     //bitcrushText.innerHTML = bitcrushNode.bits;
-    decayText.innerHTML = this.value;
+    reverbNode.decay = this.value;
+    decayText.innerHTML = reverbNode.decay;
+ 
+  },
+  false,
+);
+
+reverbWetControl.addEventListener(
+  "input",
+  function () {
+    //bitcrushNode.bits = this.value;
+    //bitcrushText.innerHTML = bitcrushNode.bits;
+    reverbNode.wet.value = this.value;
+    reverbWetText.innerHTML = reverbNode.wet.value;
   },
   false,
 );
