@@ -104,9 +104,14 @@
                         <p class="knob-value" id="delayTime-text">-</p>
                     </div>
                     <div class="knob">
-                        <p class="knob-label">Feedback</p>
-                        <input autocomplete="off" type="range" id="feedback" min="0" max="10" value="0" step="1">
-                        <p class="knob-value" id="feedback-text">-</p>
+                        <p class="knob-label">Max Delay</p>
+                        <input autocomplete="off" type="range" id="maxDelay" min="0" max="10" value="0" step="1">
+                        <p class="knob-value" id="maxDelay-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Dry-Wet</p>
+                        <button type="button" id="delay-wet"></button>
+                        <p class="knob-value" id="delay-wet-text">-</p>
                     </div>
                 </div>
                 
@@ -133,7 +138,7 @@
                     <p>Bitcrush</p>
                     <div class="knob">
                         <p class="knob-label">Bits</p>
-                        <input autocomplete="off" type="range" id="bitcrush" min="1" max="8" value="4" step="1">
+                        <input autocomplete="off" type="range" id="bitcrush" min="1" max="8" value="8" step="1">
                         <p class="knob-value" id="bitcrush-text">-</p>
                     </div>
                 </div>

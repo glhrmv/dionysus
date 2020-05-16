@@ -19,8 +19,10 @@ export const qFactorText = getById("q-factor-text");
 //delay
 export const delayTimeControl = getById("delayTime");
 export const delayTimeText = getById("delayTime-text");
-export const feedbackControl = getById("feedback");
-export const feedbackText = getById("feedback-text");
+export const maxDelayControl = getById("maxDelay");
+export const maxDelayText = getById("maxDelay-text");
+export const delayWetControl = getById("delay-wet");
+export const delayWetText = getById("delay-wet-text");
 //reverb
 export const preDelayControl = getById("pre-delay");
 export const preDelayText = getById("pre-delay-text");
@@ -29,8 +31,8 @@ export const decayText = getById("decay-text");
 export const reverbWetControl = getById("reverb-wet");
 export const reverbWetText = getById("reverb-wet-text");
 //bitcrush
-export const bitcrushControl = getById("bitcrush");
-export const bitcrushText = getById("bitcrush-text");
+export const bitcrusherControl = getById("bitcrush");
+export const bitcrusherText = getById("bitcrush-text");
 
 export const playBtn = getById("play-btn");
 export const progressBar = getById("seek");

@@ -16,12 +16,33 @@ export const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
 export const filterNode = new BiquadFilterNode(audioCtx, {
   frequency: 20000,
 });
+
+/////REVERB
 export const reverbNode = new Tone.Reverb();
 reverbNode.wet.value = 0.6;
 reverbNode.preDelay = 0;
 reverbNode.Decay = 0;
-
 reverbNode.generate();
+
+
+/////DELAY, NOT QUITE WORKING
+let delayNode = new Tone.Delay();
+
+export function newDelayNode(){
+  
+  delayNode = new Tone.Delay(1,1);
+
+}
+//delayNode.wet.value = 0.6;
+//delayNode.delayTime.value = 0;
+//delayNode.maxDelay.value = 1;
+//delayNode.generate();
+
+///////BITCRUSHER
+
+
+export const bitcrusherNode = new Tone.BitCrusher();
+bitcrusherNode.bits = 8;
 
 export const waveAnalyserNode = new AnalyserNode(audioCtx, {
   fftSize: 2048,
@@ -38,7 +59,9 @@ export const endNode = audioCtx.destination;
 Tone.connect(startNode, gainNode);
 Tone.connect(gainNode, panNode);
 Tone.connect(panNode, filterNode);
-Tone.connect(filterNode, reverbNode);
+Tone.connect(filterNode,delayNode);
+Tone.connect(delayNode, bitcrusherNode);
+Tone.connect(bitcrusherNode, reverbNode);
 Tone.connect(reverbNode, waveAnalyserNode);
 Tone.connect(waveAnalyserNode, freqAnalyserNode);
 Tone.connect(freqAnalyserNode, spectrogramAnalyserNode);

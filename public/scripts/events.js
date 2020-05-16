@@ -8,12 +8,13 @@ import {
   frequencyText,
   qFactorControl,
   qFactorText,
-  bitcrushControl,
-  bitcrushText,
+  bitcrusherControl,
+  bitcrusherText,
   delayTimeControl,
   delayTimeText,
-  feedbackControl,
-  feedbackText,
+  maxDelayControl,
+  maxDelayText,
+  delayWetControl,
   preDelayControl,
   preDelayText,
   decayControl,
@@ -21,7 +22,7 @@ import {
   reverbWetControl,
   reverbWetText,
 } from "./elements.js";
-import { gainNode, panNode, filterNode, reverbNode } from "./context.js";
+import { gainNode, panNode, filterNode, reverbNode, bitcrusherNode, newDelayNode } from "./context.js";
 
 //
 // init
@@ -33,11 +34,11 @@ frequencyText.innerHTML = frequencyControl.value;
 qFactorText.innerHTML = qFactorControl.value;
 
 delayTimeText.innerHTML = delayTimeControl.value;
-feedbackText.innerHTML = feedbackControl.value;
+maxDelayText.innerHTML = maxDelayControl.value;
 preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
 reverbWetText.innerHTML = reverbWetControl.value;
-bitcrushText.innerHTML = bitcrushControl.value;
+bitcrusherText.innerHTML = bitcrusherControl.value;
 
 //
 // event listeners
@@ -87,24 +88,38 @@ qFactorControl.addEventListener(
   },
   false,
 );
-
+/*
 ////Effects, still don't work, here for prototype purposes
 delayTimeControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
-    delayTimeText.innerHTML = this.value;
+    //bitcrusherNode.bits = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
+    delayNode.delayTime = this.value;
+    delayTimeText.innerHTML = delayNode.delayTime;
+    delayNode.generate();
   },
   false,
 );
 
-feedbackControl.addEventListener(
+maxDelayControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
-    feedbackText.innerHTML = this.value;
+    delayNode.maxDelay = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
+    maxDelayText.innerHTML = delayNode.maxDelay;
+   
+  },
+  false,
+);*/
+
+delayWetControl.addEventListener(
+  "click",
+  function () {
+    //bitcrusherNode.bits = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
+    newDelayNode();
+   
   },
   false,
 );
@@ -112,11 +127,12 @@ feedbackControl.addEventListener(
 preDelayControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
+    //bitcrusherNode.bits = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
    
     reverbNode.preDelay = this.value;
     preDelayText.innerHTML = reverbNode.preDelay;
+    reverbNode.generate();
     
   },
   false,
@@ -125,10 +141,11 @@ preDelayControl.addEventListener(
 decayControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
+    //bitcrusherNode.bits = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
     reverbNode.decay = this.value;
     decayText.innerHTML = reverbNode.decay;
+    reverbNode.generate();
  
   },
   false,
@@ -137,21 +154,22 @@ decayControl.addEventListener(
 reverbWetControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
+    //bitcrusherNode.bits = this.value;
+    //bitcrusherText.innerHTML = bitcrusherNode.bits;
     reverbNode.wet.value = this.value;
     reverbWetText.innerHTML = reverbNode.wet.value;
+    reverbNode.generate();
   },
   false,
 );
 
-// apply bitcrusher effect
-bitcrushControl.addEventListener(
+// apply bitcrusherer effect
+bitcrusherControl.addEventListener(
   "input",
   function () {
-    //bitcrushNode.bits = this.value;
-    //bitcrushText.innerHTML = bitcrushNode.bits;
-    bitcrushText.innerHTML = this.value;
+    bitcrusherNode.bits = this.value;
+    bitcrusherText.innerHTML = bitcrusherNode.bits;
+    //bitcrusherText.innerHTML = this.value;
   },
   false,
 );
