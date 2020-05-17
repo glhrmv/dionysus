@@ -24,22 +24,23 @@ reverbNode.preDelay = 0;
 reverbNode.Decay = 0;
 reverbNode.generate();
 
-
 /////DELAY, NOT QUITE WORKING
-let delayNode = new Tone.Delay();
+/*let delayNode = new Tone.Delay();
 
 export function newDelayNode(){
   
   delayNode = new Tone.Delay(1,1);
 
-}
+}*/
+export const delayNode = new Tone.FeedbackDelay();
+delayNode.delayTime.value = 0;
+delayNode.feedback.value = 0;
 //delayNode.wet.value = 0.6;
 //delayNode.delayTime.value = 0;
 //delayNode.maxDelay.value = 1;
 //delayNode.generate();
 
 ///////BITCRUSHER
-
 
 export const bitcrusherNode = new Tone.BitCrusher();
 bitcrusherNode.bits = 8;
@@ -59,7 +60,7 @@ export const endNode = audioCtx.destination;
 Tone.connect(startNode, gainNode);
 Tone.connect(gainNode, panNode);
 Tone.connect(panNode, filterNode);
-Tone.connect(filterNode,delayNode);
+Tone.connect(filterNode, delayNode);
 Tone.connect(delayNode, bitcrusherNode);
 Tone.connect(bitcrusherNode, reverbNode);
 Tone.connect(reverbNode, waveAnalyserNode);

@@ -19,8 +19,8 @@ export const qFactorText = getById("q-factor-text");
 //delay
 export const delayTimeControl = getById("delayTime");
 export const delayTimeText = getById("delayTime-text");
-export const maxDelayControl = getById("maxDelay");
-export const maxDelayText = getById("maxDelay-text");
+export const feedbackControl = getById("feedback");
+export const feedbackText = getById("feedback-text");
 export const delayWetControl = getById("delay-wet");
 export const delayWetText = getById("delay-wet-text");
 //reverb

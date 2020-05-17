@@ -12,8 +12,8 @@ import {
   bitcrusherText,
   delayTimeControl,
   delayTimeText,
-  maxDelayControl,
-  maxDelayText,
+  feedbackControl,
+  feedbackText,
   delayWetControl,
   preDelayControl,
   preDelayText,
@@ -22,7 +22,14 @@ import {
   reverbWetControl,
   reverbWetText,
 } from "./elements.js";
-import { gainNode, panNode, filterNode, reverbNode, bitcrusherNode, newDelayNode } from "./context.js";
+import {
+  gainNode,
+  panNode,
+  filterNode,
+  reverbNode,
+  bitcrusherNode,
+  delayNode,
+} from "./context.js";
 
 //
 // init
@@ -34,7 +41,7 @@ frequencyText.innerHTML = frequencyControl.value;
 qFactorText.innerHTML = qFactorControl.value;
 
 delayTimeText.innerHTML = delayTimeControl.value;
-maxDelayText.innerHTML = maxDelayControl.value;
+feedbackText.innerHTML = feedbackControl.value;
 preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
 reverbWetText.innerHTML = reverbWetControl.value;
@@ -88,30 +95,27 @@ qFactorControl.addEventListener(
   },
   false,
 );
-/*
+
 ////Effects, still don't work, here for prototype purposes
 delayTimeControl.addEventListener(
   "input",
   function () {
     //bitcrusherNode.bits = this.value;
     //bitcrusherText.innerHTML = bitcrusherNode.bits;
-    delayNode.delayTime = this.value;
-    delayTimeText.innerHTML = delayNode.delayTime;
-    delayNode.generate();
+    delayNode.delayTime.value = this.value;
+    delayTimeText.innerHTML = delayNode.delayTime.value;
   },
   false,
 );
 
-maxDelayControl.addEventListener(
+feedbackControl.addEventListener(
   "input",
   function () {
-    delayNode.maxDelay = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
-    maxDelayText.innerHTML = delayNode.maxDelay;
-   
+    delayNode.feedback.value = this.value;
+    feedbackText.innerHTML = delayNode.feedback.value;
   },
   false,
-);*/
+);
 
 delayWetControl.addEventListener(
   "click",
@@ -119,7 +123,6 @@ delayWetControl.addEventListener(
     //bitcrusherNode.bits = this.value;
     //bitcrusherText.innerHTML = bitcrusherNode.bits;
     newDelayNode();
-   
   },
   false,
 );
@@ -129,11 +132,10 @@ preDelayControl.addEventListener(
   function () {
     //bitcrusherNode.bits = this.value;
     //bitcrusherText.innerHTML = bitcrusherNode.bits;
-   
+
     reverbNode.preDelay = this.value;
     preDelayText.innerHTML = reverbNode.preDelay;
     reverbNode.generate();
-    
   },
   false,
 );
@@ -146,7 +148,6 @@ decayControl.addEventListener(
     reverbNode.decay = this.value;
     decayText.innerHTML = reverbNode.decay;
     reverbNode.generate();
- 
   },
   false,
 );
