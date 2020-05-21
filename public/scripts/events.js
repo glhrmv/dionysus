@@ -3,6 +3,8 @@ import {
   panControl,
   volumeText,
   panText,
+  pitchControl,
+  pitchText,
   filterType,
   frequencyControl,
   frequencyText,
@@ -14,13 +16,16 @@ import {
   delayTimeText,
   feedbackControl,
   feedbackText,
-  delayWetControl,
   preDelayControl,
   preDelayText,
   decayControl,
   decayText,
   reverbWetControl,
   reverbWetText,
+  vibratoFreqControl,
+  vibratoFreqText,
+  depthControl,
+  depthText,
 } from "./elements.js";
 import {
   gainNode,
@@ -29,6 +34,8 @@ import {
   reverbNode,
   bitcrusherNode,
   delayNode,
+  pitchNode,
+  vibratoNode,
 } from "./context.js";
 
 //
@@ -37,6 +44,7 @@ import {
 
 volumeText.innerHTML = volumeControl.value;
 panText.innerHTML = panControl.value;
+pitchText.innerHTML = pitchControl.value;
 frequencyText.innerHTML = frequencyControl.value;
 qFactorText.innerHTML = qFactorControl.value;
 
@@ -46,6 +54,8 @@ preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
 reverbWetText.innerHTML = reverbWetControl.value;
 bitcrusherText.innerHTML = bitcrusherControl.value;
+depthText.innerHTML = depthControl.value;
+vibratoFreqText.innerHTML = vibratoFreqControl.value;
 
 //
 // event listeners
@@ -67,6 +77,15 @@ panControl.addEventListener(
   function () {
     panNode.pan.value = this.value;
     panText.innerHTML = panNode.pan.value.toFixed(3);
+  },
+  false,
+);
+
+pitchControl.addEventListener(
+  "input",
+  function () {
+    pitchNode.pitch = this.value;
+    pitchText.innerHTML = pitchNode.pitch;
   },
   false,
 );
@@ -117,15 +136,7 @@ feedbackControl.addEventListener(
   false,
 );
 
-delayWetControl.addEventListener(
-  "click",
-  function () {
-    //bitcrusherNode.bits = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
-    newDelayNode();
-  },
-  false,
-);
+
 
 preDelayControl.addEventListener(
   "input",
@@ -164,6 +175,7 @@ reverbWetControl.addEventListener(
   false,
 );
 
+
 // apply bitcrusherer effect
 bitcrusherControl.addEventListener(
   "input",
@@ -171,6 +183,29 @@ bitcrusherControl.addEventListener(
     bitcrusherNode.bits = this.value;
     bitcrusherText.innerHTML = bitcrusherNode.bits;
     //bitcrusherText.innerHTML = this.value;
+  },
+  false,
+);
+
+
+vibratoFreqControl.addEventListener(
+  "input",
+  function () {
+  
+    vibratoNode.frequency.value = this.value;
+    vibratoFreqText.innerHTML =  vibratoNode.frequency.value;
+  
+  },
+  false,
+);
+
+depthControl.addEventListener(
+  "input",
+  function () {
+    
+    vibratoNode.depth.value = this.value;
+    depthText.innerHTML =  vibratoNode.depth.value;
+  
   },
   false,
 );

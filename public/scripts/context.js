@@ -13,6 +13,8 @@ export const startNode = new MediaElementAudioSourceNode(audioCtx, {
 });
 export const gainNode = new GainNode(audioCtx);
 export const panNode = new StereoPannerNode(audioCtx, { pan: 0 });
+export const pitchNode = new Tone.PitchShift();
+pitchNode.pitch = 0;
 export const filterNode = new BiquadFilterNode(audioCtx, {
   frequency: 20000,
 });
@@ -40,6 +42,10 @@ delayNode.feedback.value = 0;
 //delayNode.maxDelay.value = 1;
 //delayNode.generate();
 
+export const vibratoNode = new Tone.Vibrato();
+vibratoNode.frequency.value = 0;
+vibratoNode.depth.value = 0;
+
 ///////BITCRUSHER
 
 export const bitcrusherNode = new Tone.BitCrusher();
@@ -59,11 +65,13 @@ export const endNode = audioCtx.destination;
 // context connections (audio graph)
 Tone.connect(startNode, gainNode);
 Tone.connect(gainNode, panNode);
-Tone.connect(panNode, filterNode);
+Tone.connect(panNode, pitchNode);
+Tone.connect(pitchNode, filterNode);
 Tone.connect(filterNode, delayNode);
 Tone.connect(delayNode, bitcrusherNode);
 Tone.connect(bitcrusherNode, reverbNode);
-Tone.connect(reverbNode, waveAnalyserNode);
+Tone.connect(reverbNode,vibratoNode);
+Tone.connect(vibratoNode, waveAnalyserNode);
 Tone.connect(waveAnalyserNode, freqAnalyserNode);
 Tone.connect(freqAnalyserNode, spectrogramAnalyserNode);
 Tone.connect(spectrogramAnalyserNode, endNode);

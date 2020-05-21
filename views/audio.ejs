@@ -66,7 +66,7 @@
 
                 <div class="knob">
                     <p class="knob-label">Pitch</p>
-                    <input autocomplete="off" type="range" min="0.1" max="2.0" value="1.0" id="pitch" step="0.01"
+                    <input autocomplete="off" type="range" min="-50" max="50" value="0" id="pitch" step="1"
                         list="pitchrange">
                     <p class="knob-value" id="pitch-text">-</p>
                 </div>
@@ -108,11 +108,6 @@
                         <input autocomplete="off" type="range" id="feedback" min="0" max="1" value="0" step="0.1">
                         <p class="knob-value" id="feedback-text">-</p>
                     </div>
-                    <div class="knob">
-                        <p class="knob-label">Dry-Wet</p>
-                        <button type="button" id="delay-wet"></button>
-                        <p class="knob-value" id="delay-wet-text">-</p>
-                    </div>
                 </div>
                 
 
@@ -140,6 +135,20 @@
                         <p class="knob-label">Bits</p>
                         <input autocomplete="off" type="range" id="bitcrush" min="1" max="8" value="8" step="1">
                         <p class="knob-value" id="bitcrush-text">-</p>
+                    </div>
+                </div>
+
+                <div class="vibrato">
+                    <p>Vibrato</p>
+                    <div class="knob">
+                        <p class="knob-label">Frequency</p>
+                        <input autocomplete="off" type="range" id="vibrato_freq" min="0" max="20" value="0" step="0.5">
+                        <p class="knob-value" id="vibrato_freq-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Depth</p>
+                        <input autocomplete="off" type="range" id="depth" min="0" max="1" value="0" step="0.1">
+                        <p class="knob-value" id="depth-text">-</p>
                     </div>
                 </div>
             </div>
