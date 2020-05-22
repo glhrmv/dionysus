@@ -136,8 +136,6 @@ feedbackControl.addEventListener(
   false,
 );
 
-
-
 preDelayControl.addEventListener(
   "input",
   function () {
@@ -175,7 +173,6 @@ reverbWetControl.addEventListener(
   false,
 );
 
-
 // apply bitcrusherer effect
 bitcrusherControl.addEventListener(
   "input",
@@ -187,14 +184,11 @@ bitcrusherControl.addEventListener(
   false,
 );
 
-
 vibratoFreqControl.addEventListener(
   "input",
   function () {
-  
     vibratoNode.frequency.value = this.value;
-    vibratoFreqText.innerHTML =  vibratoNode.frequency.value;
-  
+    vibratoFreqText.innerHTML = vibratoNode.frequency.value;
   },
   false,
 );
@@ -202,10 +196,8 @@ vibratoFreqControl.addEventListener(
 depthControl.addEventListener(
   "input",
   function () {
-    
     vibratoNode.depth.value = this.value;
-    depthText.innerHTML =  vibratoNode.depth.value;
-  
+    depthText.innerHTML = vibratoNode.depth.value;
   },
   false,
 );

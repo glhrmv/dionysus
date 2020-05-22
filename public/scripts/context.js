@@ -70,7 +70,7 @@ Tone.connect(pitchNode, filterNode);
 Tone.connect(filterNode, delayNode);
 Tone.connect(delayNode, bitcrusherNode);
 Tone.connect(bitcrusherNode, reverbNode);
-Tone.connect(reverbNode,vibratoNode);
+Tone.connect(reverbNode, vibratoNode);
 Tone.connect(vibratoNode, waveAnalyserNode);
 Tone.connect(waveAnalyserNode, freqAnalyserNode);
 Tone.connect(freqAnalyserNode, spectrogramAnalyserNode);
