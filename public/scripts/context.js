@@ -42,6 +42,13 @@ export const bitcrushNode = new Tone.BitCrusher();
 bitcrushNode.wet.value = 0;
 bitcrushNode.bits = 8;
 
+
+//Distortion
+export const distortionNode = new Tone.Distortion();
+distortionNode.wet.value = 0;
+distortionNode.distortion = 0;
+distortionNode.oversample = "none";
+
 // Visualizers
 export const waveAnalyserNode = new AnalyserNode(audioCtx, {
   fftSize: 2048,
@@ -64,7 +71,8 @@ Tone.connect(filterNode, delayNode);
 Tone.connect(delayNode, bitcrushNode);
 Tone.connect(bitcrushNode, reverbNode);
 Tone.connect(reverbNode, vibratoNode);
-Tone.connect(vibratoNode, waveAnalyserNode);
+Tone.connect(vibratoNode,distortionNode);
+Tone.connect(distortionNode, waveAnalyserNode);
 Tone.connect(waveAnalyserNode, freqAnalyserNode);
 Tone.connect(freqAnalyserNode, spectrogramAnalyserNode);
 Tone.connect(spectrogramAnalyserNode, endNode);

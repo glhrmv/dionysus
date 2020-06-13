@@ -160,6 +160,30 @@
                         <p class="knob-value" id="depth-text">-</p>
                     </div>
                 </div>
+
+                <div class="Distortion">
+                    <p>Distortion</p>
+                    <div class="knob">
+                        <p class="knob-label">Dry/Wet</p>
+                        <input autocomplete="off" type="range" id="distortion-wet" min="0" max="1" value="0" step="0.05">
+                        <p class="knob-value" id="distortion-wet-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Amount</p>
+                        <input autocomplete="off" type="range" id="distortion_amount" min="0" max="20" value="0" step="0.5">
+                        <p class="knob-value" id="distortion_amount-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <div class="oversampling-type">
+                            <p>Oversampling</p>
+                            <select autocomplete="off" name="oversampling" id="oversampling-type">
+                                <option value="none">None</option>
+                                <option value="2x">2x</option>
+                                <option value="4x">4x</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h4>Visualizers</h4>

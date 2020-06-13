@@ -32,6 +32,11 @@ import {
   bitcrushWetControl,
   vibratoWetText,
   vibratoWetControl,
+  distortionWetControl,
+  distortionWetText,
+  distortionAmount,
+  distortionAmountText,
+  oversamplingType
 } from "./elements.js";
 import {
   gainNode,
@@ -42,6 +47,7 @@ import {
   delayNode,
   pitchNode,
   vibratoNode,
+  distortionNode
 } from "./context.js";
 
 //
@@ -60,11 +66,13 @@ decayText.innerHTML = decayControl.value;
 bitcrushText.innerHTML = bitcrushControl.value;
 depthText.innerHTML = depthControl.value;
 vibratoFreqText.innerHTML = vibratoFreqControl.value;
+distortionAmountText.innerHTML = distortionAmount.value;
 
 delayWetText.innerHTML = delayWetControl.value;
 reverbWetText.innerHTML = reverbWetControl.value;
 bitcrushWetText.innerHTML = bitcrushWetControl.value;
 vibratoWetText.innerHTML = vibratoWetControl.value;
+distortionWetText.innerHTML = distortionWetControl.value;
 
 //
 // event listeners
@@ -225,3 +233,26 @@ vibratoWetControl.addEventListener(
   },
   false,
 );
+
+distortionWetControl.addEventListener(
+  "input",
+  function () {
+    distortionNode.wet.value = this.value;
+    distortionWetText.innerHTML = distortionNode.wet.value;
+  },
+  false,
+);
+
+distortionAmount.addEventListener(
+  "input",
+  function () {
+    distortionNode.distortion = this.value;
+    distortionAmountText.innerHTML = distortionNode.distortion;
+  },
+  false,
+);
+
+// oversampling type
+oversamplingType.addEventListener("change", function () {
+  distortionNode.oversample = this.value;
+});

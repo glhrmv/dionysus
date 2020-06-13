@@ -50,6 +50,12 @@ export const depthControl = getById("depth");
 export const depthText = getById("depth-text");
 export const vibratoWetControl = getById("vibrato-wet");
 export const vibratoWetText = getById("vibrato-wet-text");
+//distortion
+export const distortionWetControl = getById("distortion-wet");
+export const distortionWetText = getById("distortion-wet-text");
+export const distortionAmount = getById("distortion_amount");
+export const distortionAmountText = getById("distortion_amount-text");
+export const oversamplingType = getById("oversampling-type");
 
 export const waveCanvas = getById("waveform");
 export const freqCanvas = getById("freqbar");
