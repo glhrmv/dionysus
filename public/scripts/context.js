@@ -32,18 +32,25 @@ delayNode.wet.value = 0;
 delayNode.delayTime.value = 0;
 delayNode.feedback.value = 0;
 
+// Vibrato
 export const vibratoNode = new Tone.Vibrato();
 vibratoNode.wet.value = 0;
 vibratoNode.frequency.value = 0;
 vibratoNode.depth.value = 0;
+
+// Tremolo
+export const tremoloNode = new Tone.Tremolo();
+tremoloNode.wet.value = 0;
+tremoloNode.frequency.value = 0;
+tremoloNode.depth.value = 0;
+tremoloNode.start();
 
 // Bitcrusher
 export const bitcrushNode = new Tone.BitCrusher();
 bitcrushNode.wet.value = 0;
 bitcrushNode.bits = 8;
 
-
-//Distortion
+// Distortion
 export const distortionNode = new Tone.Distortion();
 distortionNode.wet.value = 0;
 distortionNode.distortion = 0;
@@ -71,7 +78,8 @@ Tone.connect(filterNode, delayNode);
 Tone.connect(delayNode, bitcrushNode);
 Tone.connect(bitcrushNode, reverbNode);
 Tone.connect(reverbNode, vibratoNode);
-Tone.connect(vibratoNode,distortionNode);
+Tone.connect(vibratoNode, tremoloNode);
+Tone.connect(tremoloNode, distortionNode);
 Tone.connect(distortionNode, waveAnalyserNode);
 Tone.connect(waveAnalyserNode, freqAnalyserNode);
 Tone.connect(freqAnalyserNode, spectrogramAnalyserNode);

@@ -117,14 +117,14 @@
                         <p class="knob-value" id="reverb-wet-text">-</p>
                     </div>
                     <div class="knob">
-                        <p class="knob-label">Pre-Delay</p>
-                        <input autocomplete="off" type="range" id="pre-delay" min="0" max="5" value="0" step="1">
-                        <p class="knob-value" id="pre-delay-text">-</p>
-                    </div>
-                    <div class="knob">
                         <p class="knob-label">Decay</p>
                         <input autocomplete="off" type="range" id="decay" min="0" max="10" value="1.5" step="0.1">
                         <p class="knob-value" id="decay-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Pre-Delay</p>
+                        <input autocomplete="off" type="range" id="pre-delay" min="0" max="5" value="0" step="1">
+                        <p class="knob-value" id="pre-delay-text">-</p>
                     </div>
                 </div>
 
@@ -151,13 +151,32 @@
                     </div>
                     <div class="knob">
                         <p class="knob-label">Frequency</p>
-                        <input autocomplete="off" type="range" id="vibrato_freq" min="0" max="20" value="0" step="0.5">
-                        <p class="knob-value" id="vibrato_freq-text">-</p>
+                        <input autocomplete="off" type="range" id="vibrato-freq" min="0" max="20" value="0" step="0.5">
+                        <p class="knob-value" id="vibrato-freq-text">-</p>
                     </div>
                     <div class="knob">
                         <p class="knob-label">Depth</p>
-                        <input autocomplete="off" type="range" id="depth" min="0" max="1" value="0" step="0.1">
-                        <p class="knob-value" id="depth-text">-</p>
+                        <input autocomplete="off" type="range" id="vibrato-depth" min="0" max="1" value="0" step="0.1">
+                        <p class="knob-value" id="vibrato-depth-text">-</p>
+                    </div>
+                </div>
+
+                <div class="tremolo">
+                    <p>Tremolo</p>
+                    <div class="knob">
+                        <p class="knob-label">Dry/Wet</p>
+                        <input autocomplete="off" type="range" id="tremolo-wet" min="0" max="1" value="0" step="0.05">
+                        <p class="knob-value" id="tremolo-wet-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Frequency</p>
+                        <input autocomplete="off" type="range" id="tremolo-freq" min="0" max="20" value="0" step="0.5">
+                        <p class="knob-value" id="tremolo-freq-text">-</p>
+                    </div>
+                    <div class="knob">
+                        <p class="knob-label">Depth</p>
+                        <input autocomplete="off" type="range" id="tremolo-depth" min="0" max="1" value="0" step="0.1">
+                        <p class="knob-value" id="tremolo-depth-text">-</p>
                     </div>
                 </div>
 
@@ -175,7 +194,7 @@
                     </div>
                     <div class="knob">
                         <div class="oversampling-type">
-                            <p>Oversampling</p>
+                            <p class="knob-label">Oversampling</p>
                             <select autocomplete="off" name="oversampling" id="oversampling-type">
                                 <option value="none">None</option>
                                 <option value="2x">2x</option>

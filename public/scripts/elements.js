@@ -44,12 +44,19 @@ export const bitcrushText = getById("bitcrush-text");
 export const bitcrushWetControl = getById("bitcrush-wet");
 export const bitcrushWetText = getById("bitcrush-wet-text");
 // vibrato
-export const vibratoFreqControl = getById("vibrato_freq");
-export const vibratoFreqText = getById("vibrato_freq-text");
-export const depthControl = getById("depth");
-export const depthText = getById("depth-text");
+export const vibratoFreqControl = getById("vibrato-freq");
+export const vibratoFreqText = getById("vibrato-freq-text");
+export const vibratoDepthControl = getById("vibrato-depth");
+export const vibratoDepthText = getById("vibrato-depth-text");
 export const vibratoWetControl = getById("vibrato-wet");
 export const vibratoWetText = getById("vibrato-wet-text");
+// tremolo
+export const tremoloFreqControl = getById("tremolo-freq");
+export const tremoloFreqText = getById("tremolo-freq-text");
+export const tremoloDepthControl = getById("tremolo-depth");
+export const tremoloDepthText = getById("tremolo-depth-text");
+export const tremoloWetControl = getById("tremolo-wet");
+export const tremoloWetText = getById("tremolo-wet-text");
 //distortion
 export const distortionWetControl = getById("distortion-wet");
 export const distortionWetText = getById("distortion-wet-text");

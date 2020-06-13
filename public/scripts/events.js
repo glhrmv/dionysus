@@ -24,8 +24,14 @@ import {
   reverbWetText,
   vibratoFreqControl,
   vibratoFreqText,
-  depthControl,
-  depthText,
+  vibratoDepthControl,
+  vibratoDepthText,
+  tremoloWetControl,
+  tremoloWetText,
+  tremoloFreqText,
+  tremoloFreqControl,
+  tremoloDepthControl,
+  tremoloDepthText,
   delayWetControl,
   delayWetText,
   bitcrushWetText,
@@ -36,7 +42,7 @@ import {
   distortionWetText,
   distortionAmount,
   distortionAmountText,
-  oversamplingType
+  oversamplingType,
 } from "./elements.js";
 import {
   gainNode,
@@ -47,6 +53,7 @@ import {
   delayNode,
   pitchNode,
   vibratoNode,
+  tremoloNode,
   distortionNode
 } from "./context.js";
 
@@ -57,22 +64,32 @@ import {
 volumeText.innerHTML = volumeControl.value;
 panText.innerHTML = panControl.value;
 pitchText.innerHTML = pitchControl.value;
+
 frequencyText.innerHTML = frequencyControl.value;
 qFactorText.innerHTML = qFactorControl.value;
+delayWetText.innerHTML = delayWetControl.value;
+
 delayTimeText.innerHTML = delayTimeControl.value;
 feedbackText.innerHTML = feedbackControl.value;
+reverbWetText.innerHTML = reverbWetControl.value;
+
 preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
-bitcrushText.innerHTML = bitcrushControl.value;
-depthText.innerHTML = depthControl.value;
-vibratoFreqText.innerHTML = vibratoFreqControl.value;
-distortionAmountText.innerHTML = distortionAmount.value;
 
-delayWetText.innerHTML = delayWetControl.value;
-reverbWetText.innerHTML = reverbWetControl.value;
+bitcrushText.innerHTML = bitcrushControl.value;
 bitcrushWetText.innerHTML = bitcrushWetControl.value;
+
+vibratoDepthText.innerHTML = vibratoDepthControl.value;
+vibratoFreqText.innerHTML = vibratoFreqControl.value;
 vibratoWetText.innerHTML = vibratoWetControl.value;
+
+tremoloDepthText.innerHTML = tremoloDepthControl.value;
+tremoloFreqText.innerHTML = tremoloFreqControl.value;
+tremoloWetText.innerHTML = tremoloWetControl.value;
+
+distortionAmountText.innerHTML = distortionAmount.value;
 distortionWetText.innerHTML = distortionWetControl.value;
+
 
 //
 // event listeners
@@ -216,11 +233,11 @@ vibratoFreqControl.addEventListener(
   false,
 );
 
-depthControl.addEventListener(
+vibratoDepthControl.addEventListener(
   "input",
   function () {
     vibratoNode.depth.value = this.value;
-    depthText.innerHTML = vibratoNode.depth.value;
+    vibratoDepthText.innerHTML = vibratoNode.depth.value;
   },
   false,
 );
@@ -230,6 +247,33 @@ vibratoWetControl.addEventListener(
   function () {
     vibratoNode.wet.value = this.value;
     vibratoWetText.innerHTML = vibratoNode.wet.value;
+  },
+  false,
+);
+
+tremoloFreqControl.addEventListener(
+  "input",
+  function () {
+    tremoloNode.frequency.value = this.value;
+    tremoloFreqText.innerHTML = tremoloNode.frequency.value;
+  },
+  false,
+);
+
+tremoloDepthControl.addEventListener(
+  "input",
+  function () {
+    tremoloNode.depth.value = this.value;
+    tremoloDepthText.innerHTML = tremoloNode.depth.value;
+  },
+  false,
+);
+
+tremoloWetControl.addEventListener(
+  "input",
+  function () {
+    tremoloNode.wet.value = this.value;
+    tremoloWetText.innerHTML = tremoloNode.wet.value;
   },
   false,
 );

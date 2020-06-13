@@ -224,6 +224,7 @@ footer {
   font-size: 0.8rem; }
 
 .effects > div > p {
+  font-weight: bold;
   margin-bottom: 1.2rem; }
 
 .visualizers .viz-row {
