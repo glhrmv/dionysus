@@ -196,7 +196,7 @@ footer {
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); }
+  grid-template-columns: repeat(auto-fill, minmax(33%, 1fr)); }
 
 .knob {
   text-align: center; }
@@ -224,7 +224,6 @@ footer {
   font-size: 0.8rem; }
 
 .effects > div > p {
-  letter-spacing: 0.10rem;
   margin-bottom: 1.2rem; }
 
 .visualizers .viz-row {
