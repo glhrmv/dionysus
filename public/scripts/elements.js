@@ -18,32 +18,38 @@ export const frequencyText = getById("frequency-text");
 export const qFactorControl = getById("q-factor");
 export const qFactorText = getById("q-factor-text");
 
-//effects
-//delay
+export const playBtn = getById("play-btn");
+export const progressBar = getById("seek");
+export const startTime = getById("start-time");
+export const endTime = getById("end-time");
+
+// effects
+// delay
 export const delayTimeControl = getById("delayTime");
 export const delayTimeText = getById("delayTime-text");
 export const feedbackControl = getById("feedback");
 export const feedbackText = getById("feedback-text");
-//reverb
+export const delayWetControl = getById("delay-wet");
+export const delayWetText = getById("delay-wet-text");
+// reverb
 export const preDelayControl = getById("pre-delay");
 export const preDelayText = getById("pre-delay-text");
 export const decayControl = getById("decay");
 export const decayText = getById("decay-text");
 export const reverbWetControl = getById("reverb-wet");
 export const reverbWetText = getById("reverb-wet-text");
-//bitcrush
-export const bitcrusherControl = getById("bitcrush");
-export const bitcrusherText = getById("bitcrush-text");
-//vibrato
+// bitcrush
+export const bitcrushControl = getById("bitcrush");
+export const bitcrushText = getById("bitcrush-text");
+export const bitcrushWetControl = getById("bitcrush-wet");
+export const bitcrushWetText = getById("bitcrush-wet-text");
+// vibrato
 export const vibratoFreqControl = getById("vibrato_freq");
 export const vibratoFreqText = getById("vibrato_freq-text");
 export const depthControl = getById("depth");
 export const depthText = getById("depth-text");
-
-export const playBtn = getById("play-btn");
-export const progressBar = getById("seek");
-export const startTime = getById("start-time");
-export const endTime = getById("end-time");
+export const vibratoWetControl = getById("vibrato-wet");
+export const vibratoWetText = getById("vibrato-wet-text");
 
 export const waveCanvas = getById("waveform");
 export const freqCanvas = getById("freqbar");

@@ -108,7 +108,6 @@ footer {
   display: grid;
   grid-template-columns: 1fr 7fr; }
   .audio-player .left {
-    justify-self: center;
     align-self: center; }
   .audio-player .play-btn {
     cursor: pointer;
@@ -222,7 +221,11 @@ footer {
     width: 60%; }
 
 .effects .knob-label {
-  font-size: x-small; }
+  font-size: 0.8rem; }
+
+.effects > div > p {
+  letter-spacing: 0.10rem;
+  margin-bottom: 1.2rem; }
 
 .visualizers .viz-row {
   display: grid;

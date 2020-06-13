@@ -10,8 +10,8 @@ import {
   frequencyText,
   qFactorControl,
   qFactorText,
-  bitcrusherControl,
-  bitcrusherText,
+  bitcrushControl,
+  bitcrushText,
   delayTimeControl,
   delayTimeText,
   feedbackControl,
@@ -26,13 +26,19 @@ import {
   vibratoFreqText,
   depthControl,
   depthText,
+  delayWetControl,
+  delayWetText,
+  bitcrushWetText,
+  bitcrushWetControl,
+  vibratoWetText,
+  vibratoWetControl,
 } from "./elements.js";
 import {
   gainNode,
   panNode,
   filterNode,
   reverbNode,
-  bitcrusherNode,
+  bitcrushNode,
   delayNode,
   pitchNode,
   vibratoNode,
@@ -47,15 +53,18 @@ panText.innerHTML = panControl.value;
 pitchText.innerHTML = pitchControl.value;
 frequencyText.innerHTML = frequencyControl.value;
 qFactorText.innerHTML = qFactorControl.value;
-
 delayTimeText.innerHTML = delayTimeControl.value;
 feedbackText.innerHTML = feedbackControl.value;
 preDelayText.innerHTML = preDelayControl.value;
 decayText.innerHTML = decayControl.value;
-reverbWetText.innerHTML = reverbWetControl.value;
-bitcrusherText.innerHTML = bitcrusherControl.value;
+bitcrushText.innerHTML = bitcrushControl.value;
 depthText.innerHTML = depthControl.value;
 vibratoFreqText.innerHTML = vibratoFreqControl.value;
+
+delayWetText.innerHTML = delayWetControl.value;
+reverbWetText.innerHTML = reverbWetControl.value;
+bitcrushWetText.innerHTML = bitcrushWetControl.value;
+vibratoWetText.innerHTML = vibratoWetControl.value;
 
 //
 // event listeners
@@ -115,12 +124,9 @@ qFactorControl.addEventListener(
   false,
 );
 
-////Effects, still don't work, here for prototype purposes
 delayTimeControl.addEventListener(
   "input",
   function () {
-    //bitcrusherNode.bits = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
     delayNode.delayTime.value = this.value;
     delayTimeText.innerHTML = delayNode.delayTime.value;
   },
@@ -136,12 +142,18 @@ feedbackControl.addEventListener(
   false,
 );
 
+delayWetControl.addEventListener(
+  "input",
+  function () {
+    delayNode.wet.value = this.value;
+    delayWetText.innerHTML = delayNode.wet.value;
+  },
+  false,
+);
+
 preDelayControl.addEventListener(
   "input",
   function () {
-    //bitcrusherNode.bits = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
-
     reverbNode.preDelay = this.value;
     preDelayText.innerHTML = reverbNode.preDelay;
     reverbNode.generate();
@@ -152,8 +164,6 @@ preDelayControl.addEventListener(
 decayControl.addEventListener(
   "input",
   function () {
-    //bitcrusherNode.bits = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
     reverbNode.decay = this.value;
     decayText.innerHTML = reverbNode.decay;
     reverbNode.generate();
@@ -164,8 +174,6 @@ decayControl.addEventListener(
 reverbWetControl.addEventListener(
   "input",
   function () {
-    //bitcrusherNode.bits = this.value;
-    //bitcrusherText.innerHTML = bitcrusherNode.bits;
     reverbNode.wet.value = this.value;
     reverbWetText.innerHTML = reverbNode.wet.value;
     reverbNode.generate();
@@ -173,13 +181,20 @@ reverbWetControl.addEventListener(
   false,
 );
 
-// apply bitcrusherer effect
-bitcrusherControl.addEventListener(
+bitcrushControl.addEventListener(
   "input",
   function () {
-    bitcrusherNode.bits = this.value;
-    bitcrusherText.innerHTML = bitcrusherNode.bits;
-    //bitcrusherText.innerHTML = this.value;
+    bitcrushNode.bits = this.value;
+    bitcrushText.innerHTML = bitcrushNode.bits;
+  },
+  false,
+);
+
+bitcrushWetControl.addEventListener(
+  "input",
+  function () {
+    bitcrushNode.wet.value = this.value;
+    bitcrushWetText.innerHTML = bitcrushNode.wet.value;
   },
   false,
 );
@@ -198,6 +213,15 @@ depthControl.addEventListener(
   function () {
     vibratoNode.depth.value = this.value;
     depthText.innerHTML = vibratoNode.depth.value;
+  },
+  false,
+);
+
+vibratoWetControl.addEventListener(
+  "input",
+  function () {
+    vibratoNode.wet.value = this.value;
+    vibratoWetText.innerHTML = vibratoNode.wet.value;
   },
   false,
 );

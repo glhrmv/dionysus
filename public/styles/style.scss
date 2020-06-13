@@ -133,10 +133,12 @@ footer {
   top: 0;
   display: grid;
   grid-template-columns: 1fr 7fr;
+
   .left {
-    justify-self: center;
+    // justify-self: center;
     align-self: center;
   }
+
   .play-btn {
     cursor: pointer;
     position: relative;
@@ -287,7 +289,12 @@ footer {
 }
 
 .effects .knob-label {
-  font-size: x-small;
+  font-size: 0.8rem;
+}
+
+.effects > div > p {
+  letter-spacing: 0.10rem;
+  margin-bottom: 1.2rem;
 }
 
 .visualizers {
