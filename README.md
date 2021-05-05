@@ -1,5 +1,7 @@
 # dionysus
 
+> University project for FEUP, MIEIC (MNSE).
+
 An audio playground for YouTube videos.
 
 ## Usage
