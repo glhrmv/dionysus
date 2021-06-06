@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const youtubedl = require("youtube-dl");
+const youtubedl = require("youtube-dl-exec");
 
 const router = express.Router();
 
@@ -35,7 +35,7 @@ router.post("/", (req, res, next) => {
   };
 
   // Download the video
-  youtubedl.exec(req.body.videoUrl, args, options, (err, output) => {
+  youtubedl(req.body.videoUrl, args, options, (err, output) => {
     if (err) return next(err);
 
     // Everything went well, redirect to audio
