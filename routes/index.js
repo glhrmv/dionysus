@@ -16,31 +16,30 @@ router.get("/", (req, res) => {
 router.post("/", (req, res, next) => {
   const videoId = parseVideoId(req.body.videoUrl);
 
+  // Create audio folder if inexistent
   if (!fs.existsSync(audioFolder)) fs.mkdirSync(audioFolder);
 
   // If we already have this video downloaded, just redirect to audio page
   if (fs.existsSync(path.join(audioFolder, `${videoId}.mp3`)))
     return res.redirect("/audio?id=" + videoId);
 
-  const args = [
-    "--extract-audio",
-    "--audio-format",
-    "mp3",
-    "-o",
-    "%(id)s.%(ext)s",
-  ];
+  const args = {
+    extractAudio: true,
+    audioFormat: "mp3",
+    o: "%(id)s.%(ext)s"
+  };
 
   const options = {
     cwd: audioFolder,
   };
 
   // Download the video
-  youtubedl(req.body.videoUrl, args, options, (err, output) => {
-    if (err) return next(err);
-
+  youtubedl(req.body.videoUrl, args, options)
+  .then(output => {
     // Everything went well, redirect to audio
     return res.redirect("/audio?id=" + videoId);
-  });
+  })
+  .catch(err => next(err));
 });
 
 // GET /audio

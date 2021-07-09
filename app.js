@@ -21,7 +21,7 @@ app.use(
   sassMiddleware({
     src: path.join(__dirname, "public"),
     dest: path.join(__dirname, "public"),
-    indentedSyntax: false, // true = .sass and false = .scss
+    indentedSyntax: false, // true = .sass, false = .scss
     sourceMap: true,
   }),
 );
