@@ -4,7 +4,9 @@
 
 An audio playground for YouTube videos.
 
-![dionysus demo](./demo.gif)
+<p align="center">
+<img src="./demo.gif" alt="demo" />
+</p>
 
 ## Usage
 
