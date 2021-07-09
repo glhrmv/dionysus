@@ -4,6 +4,8 @@
 
 An audio playground for YouTube videos.
 
+![dionysus demo](./demo.gif)
+
 ## Usage
 
 You will need [Node.js](https://nodejs.org/en/) and [ffmpeg](https://www.ffmpeg.org/) on your machine.
